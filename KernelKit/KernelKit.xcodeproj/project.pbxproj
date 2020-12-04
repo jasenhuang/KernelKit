@@ -14,10 +14,15 @@
 		5516DA7F2578E41600C0D268 /* KKMemoryMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 5516DA7D2578E41600C0D268 /* KKMemoryMapping.m */; };
 		5516DA882578E44C00C0D268 /* KernelKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5516DA872578E44C00C0D268 /* KernelKitTests.m */; };
 		5516DA8A2578E44C00C0D268 /* KernelKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5516DA682578E34A00C0D268 /* KernelKit.framework */; };
-		5516DA972578E50F00C0D268 /* KKOOM.h in Headers */ = {isa = PBXBuildFile; fileRef = 5516DA952578E50F00C0D268 /* KKOOM.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5516DA982578E50F00C0D268 /* KKOOM.m in Sources */ = {isa = PBXBuildFile; fileRef = 5516DA962578E50F00C0D268 /* KKOOM.m */; };
+		5516DA972578E50F00C0D268 /* KKOOMTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 5516DA952578E50F00C0D268 /* KKOOMTracker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5516DA982578E50F00C0D268 /* KKOOMTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5516DA962578E50F00C0D268 /* KKOOMTracker.m */; };
 		5516DAAA25791E4D00C0D268 /* KKDynamicLinker.h in Headers */ = {isa = PBXBuildFile; fileRef = 5516DAA825791E4D00C0D268 /* KKDynamicLinker.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5516DAAB25791E4D00C0D268 /* KKDynamicLinker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5516DAA925791E4D00C0D268 /* KKDynamicLinker.m */; };
+		5516DAAB25791E4D00C0D268 /* KKDynamicLinker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5516DAA925791E4D00C0D268 /* KKDynamicLinker.mm */; };
+		5516DABB257A2BC600C0D268 /* KKMemoryMappingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5516DABA257A2BC600C0D268 /* KKMemoryMappingTest.m */; };
+		5516DAC5257A2F9500C0D268 /* KKFishHook.h in Headers */ = {isa = PBXBuildFile; fileRef = 5516DAC3257A2F9500C0D268 /* KKFishHook.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5516DAC6257A2F9500C0D268 /* KKFishHook.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5516DAC4257A2F9500C0D268 /* KKFishHook.mm */; };
+		5516DAE2257A3E3400C0D268 /* fishhook.h in Headers */ = {isa = PBXBuildFile; fileRef = 5516DAE0257A3E3400C0D268 /* fishhook.h */; };
+		5516DAE3257A3E3400C0D268 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 5516DAE1257A3E3400C0D268 /* fishhook.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,10 +46,15 @@
 		5516DA852578E44C00C0D268 /* KernelKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KernelKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5516DA872578E44C00C0D268 /* KernelKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KernelKitTests.m; sourceTree = "<group>"; };
 		5516DA892578E44C00C0D268 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5516DA952578E50F00C0D268 /* KKOOM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKOOM.h; sourceTree = "<group>"; };
-		5516DA962578E50F00C0D268 /* KKOOM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKOOM.m; sourceTree = "<group>"; };
+		5516DA952578E50F00C0D268 /* KKOOMTracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKOOMTracker.h; sourceTree = "<group>"; };
+		5516DA962578E50F00C0D268 /* KKOOMTracker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKOOMTracker.m; sourceTree = "<group>"; };
 		5516DAA825791E4D00C0D268 /* KKDynamicLinker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKDynamicLinker.h; sourceTree = "<group>"; };
-		5516DAA925791E4D00C0D268 /* KKDynamicLinker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKDynamicLinker.m; sourceTree = "<group>"; };
+		5516DAA925791E4D00C0D268 /* KKDynamicLinker.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = KKDynamicLinker.mm; sourceTree = "<group>"; };
+		5516DABA257A2BC600C0D268 /* KKMemoryMappingTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKMemoryMappingTest.m; sourceTree = "<group>"; };
+		5516DAC3257A2F9500C0D268 /* KKFishHook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKFishHook.h; sourceTree = "<group>"; };
+		5516DAC4257A2F9500C0D268 /* KKFishHook.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = KKFishHook.mm; sourceTree = "<group>"; };
+		5516DAE0257A3E3400C0D268 /* fishhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fishhook.h; sourceTree = "<group>"; };
+		5516DAE1257A3E3400C0D268 /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fishhook.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +97,7 @@
 		5516DA6A2578E34A00C0D268 /* KernelKit */ = {
 			isa = PBXGroup;
 			children = (
+				5516DAC2257A2F5100C0D268 /* Hook */,
 				5516DAA725791E0D00C0D268 /* DYLD */,
 				5516DA942578E4FC00C0D268 /* Memory */,
 				5516DA752578E36B00C0D268 /* IO */,
@@ -119,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				5516DA872578E44C00C0D268 /* KernelKitTests.m */,
+				5516DABA257A2BC600C0D268 /* KKMemoryMappingTest.m */,
 				5516DA892578E44C00C0D268 /* Info.plist */,
 			);
 			path = KernelKitTests;
@@ -127,8 +139,8 @@
 		5516DA942578E4FC00C0D268 /* Memory */ = {
 			isa = PBXGroup;
 			children = (
-				5516DA952578E50F00C0D268 /* KKOOM.h */,
-				5516DA962578E50F00C0D268 /* KKOOM.m */,
+				5516DA952578E50F00C0D268 /* KKOOMTracker.h */,
+				5516DA962578E50F00C0D268 /* KKOOMTracker.m */,
 			);
 			path = Memory;
 			sourceTree = "<group>";
@@ -137,9 +149,20 @@
 			isa = PBXGroup;
 			children = (
 				5516DAA825791E4D00C0D268 /* KKDynamicLinker.h */,
-				5516DAA925791E4D00C0D268 /* KKDynamicLinker.m */,
+				5516DAA925791E4D00C0D268 /* KKDynamicLinker.mm */,
 			);
 			path = DYLD;
+			sourceTree = "<group>";
+		};
+		5516DAC2257A2F5100C0D268 /* Hook */ = {
+			isa = PBXGroup;
+			children = (
+				5516DAC3257A2F9500C0D268 /* KKFishHook.h */,
+				5516DAC4257A2F9500C0D268 /* KKFishHook.mm */,
+				5516DAE0257A3E3400C0D268 /* fishhook.h */,
+				5516DAE1257A3E3400C0D268 /* fishhook.c */,
+			);
+			path = Hook;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,9 +173,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5516DA782578E3D000C0D268 /* KKThread.h in Headers */,
+				5516DAE2257A3E3400C0D268 /* fishhook.h in Headers */,
 				5516DA6D2578E34A00C0D268 /* KernelKit.h in Headers */,
 				5516DAAA25791E4D00C0D268 /* KKDynamicLinker.h in Headers */,
-				5516DA972578E50F00C0D268 /* KKOOM.h in Headers */,
+				5516DAC5257A2F9500C0D268 /* KKFishHook.h in Headers */,
+				5516DA972578E50F00C0D268 /* KKOOMTracker.h in Headers */,
 				5516DA7E2578E41600C0D268 /* KKMemoryMapping.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -253,10 +278,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5516DAAB25791E4D00C0D268 /* KKDynamicLinker.m in Sources */,
-				5516DA982578E50F00C0D268 /* KKOOM.m in Sources */,
+				5516DAAB25791E4D00C0D268 /* KKDynamicLinker.mm in Sources */,
+				5516DA982578E50F00C0D268 /* KKOOMTracker.m in Sources */,
 				5516DA792578E3D000C0D268 /* KKThread.m in Sources */,
 				5516DA7F2578E41600C0D268 /* KKMemoryMapping.m in Sources */,
+				5516DAE3257A3E3400C0D268 /* fishhook.c in Sources */,
+				5516DAC6257A2F9500C0D268 /* KKFishHook.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5516DA882578E44C00C0D268 /* KernelKitTests.m in Sources */,
+				5516DABB257A2BC600C0D268 /* KKMemoryMappingTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

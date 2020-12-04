@@ -5,8 +5,12 @@
 //  Created by jasenhuang on 2020/12/3.
 //
 
-#import "KKOOM.h"
+#import "KKOOMTracker.h"
 
-@implementation KKOOM
+#if TARGET_OS_IOS
+
+@implementation KKOOMTracker
 
 @end
+
+#endif

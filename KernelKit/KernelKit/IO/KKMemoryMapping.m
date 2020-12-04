@@ -95,7 +95,7 @@ NSString* const KKMemoryMappingDomain = @"me.jasen.KenelKit.KKMemoryMapping";
     if (!_pointer) return NO;
     
     NSError* error;
-    if (![KKMemoryMapping munmap:self error:&error]){
+    if (![KKMemoryMapping kk_munmap:self error:&error]){
         return NO;
     };
     
@@ -103,7 +103,7 @@ NSString* const KKMemoryMappingDomain = @"me.jasen.KenelKit.KKMemoryMapping";
         return NO;
     }
     
-    if (![KKMemoryMapping mmap:self error:&error]){
+    if (![KKMemoryMapping kk_mmap:self error:&error]){
         return NO;
     }
     
@@ -120,20 +120,20 @@ NSString* const KKMemoryMappingDomain = @"me.jasen.KenelKit.KKMemoryMapping";
 
 @implementation KKMemoryMapping
 
-+ (KKMemoryMappingHandler*)mmap:(NSURL*)fileURL options:(NSDictionary*)options error:(NSError**)error {
++ (KKMemoryMappingHandler*)kk_mmap:(NSURL*)fileURL options:(NSDictionary*)options error:(NSError**)error {
     KKMemoryMappingHandler* handler = [[KKMemoryMappingHandler alloc] initWithFileURL:fileURL options:options];
-    if (![KKMemoryMapping mmap:handler error:error]){
+    if (![KKMemoryMapping kk_mmap:handler error:error]){
         return nil;
     }
     return handler;
 }
 
-+ (BOOL)mmap:(KKMemoryMappingHandler*)handler error:(NSError**)error {
++ (BOOL)kk_mmap:(KKMemoryMappingHandler*)handler error:(NSError**)error {
     if (!handler.fileURL.isFileURL || !handler.fileURL.path.length) {
         *error = [NSError errorWithDomain:KKMemoryMappingDomain
                                      code:-1
                                  userInfo:@{@"msg":@"fileURL is empty"}];
-        return nil;
+        return NO;
     }
     /* 打开文件 */
     int fd = open(handler.fileURL.path.UTF8String, O_RDWR|O_CREAT, S_IREAD|S_IWRITE);
@@ -141,7 +141,7 @@ NSString* const KKMemoryMappingDomain = @"me.jasen.KenelKit.KKMemoryMapping";
         *error = [NSError errorWithDomain:KKMemoryMappingDomain
                                      code:errno
                                  userInfo:@{@"msg":@"open file error"}];
-        return nil;
+        return NO;
     }
     NSRange range = [handler.options[@"range"] rangeValue];
     size_t offset = range.location;
@@ -152,7 +152,7 @@ NSString* const KKMemoryMappingDomain = @"me.jasen.KenelKit.KKMemoryMapping";
         *error = [NSError errorWithDomain:KKMemoryMappingDomain
                                      code:errno
                                  userInfo:@{@"msg":@"file stat error"}];
-        return nil;
+        return NO;
     }
     size_t length = range.length ? : fileStat.st_size;
     length = length ? : PAGE_SIZE;
@@ -169,7 +169,7 @@ NSString* const KKMemoryMappingDomain = @"me.jasen.KenelKit.KKMemoryMapping";
         *error = [NSError errorWithDomain:KKMemoryMappingDomain
                                      code:errno
                                  userInfo:@{@"msg":@"mmap error"}];
-        return nil;
+        return NO;
     }
 
     handler.pointer = pointer;
@@ -181,10 +181,10 @@ NSString* const KKMemoryMappingDomain = @"me.jasen.KenelKit.KKMemoryMapping";
     /* 文件已在内存, 关闭文件也可以操纵内存 */
     close(fd);
 #endif
-    return handler;
+    return YES;
 }
 
-+ (BOOL)msync:(KKMemoryMappingHandler*)handler error:(NSError**)error {
++ (BOOL)kk_msync:(KKMemoryMappingHandler*)handler error:(NSError**)error {
     if (!handler.pointer) return NO;
     
     int code = msync(handler.pointer, handler.fileRange.length, MS_ASYNC);
@@ -196,7 +196,7 @@ NSString* const KKMemoryMappingDomain = @"me.jasen.KenelKit.KKMemoryMapping";
     return NO;
 }
 
-+ (BOOL)munmap:(KKMemoryMappingHandler*)handler error:(NSError**)error {
++ (BOOL)kk_munmap:(KKMemoryMappingHandler*)handler error:(NSError**)error {
     if (!handler.pointer) return NO;
     int code = munmap(handler.pointer, handler.fileRange.length);
     if (code) {

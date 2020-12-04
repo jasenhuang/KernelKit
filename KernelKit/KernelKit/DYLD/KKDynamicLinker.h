@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <mach-o/loader.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,12 +17,34 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic) void* saddr;           /* Address of nearest symbol */
 @end
 
+@interface KKMachInfo : NSObject
+@property(nonatomic) NSString* name;
+@property(nonatomic) const struct mach_header* header;
+@property(nonatomic) NSUInteger vmaddr_slice;
+@end
+
+typedef void(^kk_mach_image_callback)(const struct mach_header*,intptr_t);
+
 @interface KKDynamicLinker : NSObject
+/**
+ * get info at address
+ */
++ (KKDLInfo*)kk_dladdr:(const void*)addr;
 
 /**
- * 
+ *  mach image add callback
  */
-+ (KKDLInfo*)dladdr:(const void*)addr;
++ (void)kk_register_add_callback:(kk_mach_image_callback)callback;
+
+/**
+ *  mach image remove callback
+ */
++ (void)kk_register_remove_callback:(kk_mach_image_callback)callback;
+
+/**
+ *  get loaded mach images
+ */
++ (NSArray<KKMachInfo*>*)kk_get_loaded_mach_images;
 
 @end
 

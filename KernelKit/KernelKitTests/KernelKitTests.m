@@ -9,16 +9,12 @@
 #import <KernelKit/KernelKit.h>
 
 @interface KernelKitTests : XCTestCase
-@property(nonatomic) KKMemoryMappingHandler* handler;
-@property(nonatomic) NSString* docPath;
 @end
 
 @implementation KernelKitTests
 
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    self.docPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
-    
 }
 
 - (void)tearDown {
@@ -28,16 +24,7 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
-    self.handler = [KKMemoryMapping mmap:[NSURL fileURLWithPath:[self.docPath stringByAppendingPathComponent:@"file"]]
-                                          options:@{}
-                                            error:nil];
-    [self.handler writeData:[@"hello world!" dataUsingEncoding:NSUTF8StringEncoding] offset:0];
-    
-    NSData* data = [self.handler readData:NSMakeRange(5, 5)];
-    NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-    
-    [KKMemoryMapping munmap:self.handler error:nil];
-    
+    KKOOMTracker* tracker = [KKOOMTracker new];
 }
 
 - (void)testPerformanceExample {
