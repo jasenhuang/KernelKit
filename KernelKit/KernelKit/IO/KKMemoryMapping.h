@@ -30,24 +30,31 @@ typedef NS_OPTIONS(NSUInteger, KK_MEM_MAP_TYPE) {
 extern NSString* const KKMemoryMappingDomain;
 
 @interface KKMemoryMappingHandler : NSObject
+@property(nonatomic, readonly) NSURL* fileURL;
+@property(nonatomic, copy, readonly) NSDictionary* options;
+
+@property(nonatomic, readonly) void* pointer;           //mapping memory address;
+@property(nonatomic, readonly) NSRange fileRange;       //mapping file range
+@property(nonatomic, readonly) NSUInteger fileSize;     //current file size
+
+- (instancetype)initWithFileURL:(NSURL*)fileURL options:(NSDictionary*)options;
 
 /**
- *  create memory mapping handler
+ *  read data with memory range
  */
-+ (KKMemoryMappingHandler*)handlerForURL:(NSURL*)fileURL options:(NSDictionary*)options;
+- (NSData*)readData:(NSRange)range;
 
 /**
- *  read data at offset with length
- *  offset -> file offset
- */
-- (NSData*)readAtOffset:(NSUInteger)offet length:(NSUInteger)length;
-
-/**
- * write data at offset
- * offset -> file offset
+ * write data at memory offset
  * extend file automatically
  */
-- (BOOL)write:(NSData*)data offset:(NSUInteger)offset;
+- (BOOL)writeData:(NSData*)data offset:(NSUInteger)offset;
+
+/**
+ * append data
+ * extend file automatically
+ */
+- (BOOL)appendData:(NSData*)data;
 
 @end
 
@@ -63,6 +70,11 @@ extern NSString* const KKMemoryMappingDomain;
  *
  */
 + (KKMemoryMappingHandler*)mmap:(NSURL*)fileURL options:(NSDictionary*)options error:(NSError**)error;
+
+/**
+ * remmap
+ */
++ (BOOL)mmap:(KKMemoryMappingHandler*)handler error:(NSError**)error;
 
 /**
  * msync

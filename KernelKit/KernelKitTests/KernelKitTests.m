@@ -17,7 +17,7 @@
 
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    self.docPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, NO).firstObject;
+    self.docPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
     
 }
 
@@ -28,15 +28,15 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
-    self.handler = [KKMemoryMapping memoryMapping:[NSURL fileURLWithPath:[self.docPath stringByAppendingPathComponent:@"file"]]
+    self.handler = [KKMemoryMapping mmap:[NSURL fileURLWithPath:[self.docPath stringByAppendingPathComponent:@"file"]]
                                           options:@{}
                                             error:nil];
-    [self.handler write:[@"hello world!" dataUsingEncoding:NSUTF8StringEncoding] offset:0];
+    [self.handler writeData:[@"hello world!" dataUsingEncoding:NSUTF8StringEncoding] offset:0];
     
-    NSData* data = [self.handler readAtOffset:5 length:5];
+    NSData* data = [self.handler readData:NSMakeRange(5, 5)];
     NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     
-    [KKMemoryMapping memoryUnmapping:self.handler error:nil];
+    [KKMemoryMapping munmap:self.handler error:nil];
     
 }
 
