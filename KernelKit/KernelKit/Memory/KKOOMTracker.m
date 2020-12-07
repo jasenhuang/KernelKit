@@ -8,9 +8,11 @@
 #import "KKOOMTracker.h"
 #if TARGET_OS_IOS
 #import <UIKit/UIKit.h>
+#import "KKSignalHandler.h"
+#import "KKMemoryMapping.h"
 
 @interface KKOOMTracker()
-
+@property(nonatomic)KKMemoryMappingHandler* mapHandler;
 @end
 
 @implementation KKOOMTracker
@@ -25,6 +27,10 @@
 }
 
 - (void)setup {
+    NSString* docPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
+    NSURL* fileURL = [NSURL fileURLWithPath:[docPath stringByAppendingPathComponent:@"oom.tracker"]];
+    self.mapHandler = [KKMemoryMapping kk_mmap:fileURL options:nil error:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleDidEnterBackground:)
                                                  name:UIApplicationDidEnterBackgroundNotification
@@ -33,6 +39,11 @@
                                              selector:@selector(handleDidBecomeActive:)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
+    
+    [KKSignalHandler kk_register_signals_callback:^(kk_signal signal) {
+        NSLog(@"signal occur");
+        
+    }];
 }
 
 - (void)handleDidEnterBackground:(NSNotification*) notif {

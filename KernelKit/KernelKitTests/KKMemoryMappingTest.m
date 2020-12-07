@@ -35,7 +35,7 @@
     NSData* data = [self.handler readData:NSMakeRange(5, 5)];
     NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     
-    [KKMemoryMapping kk_munmap:self.handler error:nil];
+    [KKMemoryMapping kk_munmap_handler:self.handler error:nil];
 }
 
 - (void)testPerformanceExample {

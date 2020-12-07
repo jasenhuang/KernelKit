@@ -69,22 +69,24 @@ extern NSString* const KKMemoryMappingDomain;
  *  flags -> KK_MEM_SHARE_TYPE | KK_MEM_MAP_TYPE (default: KK_MEM_SHARE_SHARED)
  *
  */
-+ (KKMemoryMappingHandler*)kk_mmap:(NSURL*)fileURL options:(NSDictionary*)options error:(NSError**)error;
++ (KKMemoryMappingHandler*)kk_mmap:(NSURL*)fileURL
+                           options:(nullable NSDictionary*)options
+                             error:(out NSError**)error;
 
 /**
  * remmap
  */
-+ (BOOL)kk_mmap:(KKMemoryMappingHandler*)handler error:(NSError**)error;
++ (BOOL)kk_mmap_handler:(KKMemoryMappingHandler*)handler error:(NSError**)error;
 
 /**
  * msync
  */
-+ (BOOL)kk_msync:(KKMemoryMappingHandler*)handler error:(NSError**)error;
++ (BOOL)kk_msync_handler:(KKMemoryMappingHandler*)handler error:(NSError**)error;
 
 /**
  * munmap
  */
-+ (BOOL)kk_munmap:(KKMemoryMappingHandler*)handler error:(NSError**)error;
++ (BOOL)kk_munmap_handler:(KKMemoryMappingHandler*)handler error:(NSError**)error;
 
 @end
 
