@@ -57,11 +57,15 @@ static void dyld_image_add_callback(const struct mach_header* header,
     for (kk_mach_image_callback block in _kk_add_blocks) {
         block(header, slice);
     }
-    [_kk_add_blocks removeAllObjects];
 }
-+ (void)kk_register_add_callback:(kk_mach_image_callback)callback {
+
++ (void)kk_register_image_add_callback:(kk_mach_image_callback)callback {
     [_kk_add_blocks addObject:callback];
     _dyld_register_func_for_add_image(dyld_image_add_callback);
+}
+
++ (void)kk_unregister_image_add_callback:(kk_mach_image_callback)callback {
+    [_kk_add_blocks removeObject:callback];
 }
 
 static NSMutableArray* _kk_remove_blocks = @[].mutableCopy;
@@ -70,11 +74,15 @@ static void dyld_image_remove_callback(const struct mach_header* header,
     for (void(^block)(const struct mach_header*, intptr_t) in _kk_remove_blocks) {
         block(header, slice);
     }
-    [_kk_remove_blocks removeAllObjects];
 }
-+ (void)kk_register_remove_callback:(kk_mach_image_callback)callback {
+
++ (void)kk_register_image_remove_callback:(kk_mach_image_callback)callback {
     [_kk_remove_blocks addObject:callback];
     _dyld_register_func_for_remove_image(dyld_image_remove_callback);
+}
+
++ (void)kk_unregister_image_remove_callback:(kk_mach_image_callback)callback {
+    [_kk_remove_blocks removeObject:callback];
 }
 
 @end

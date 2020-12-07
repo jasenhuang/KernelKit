@@ -34,12 +34,13 @@ typedef void(^kk_mach_image_callback)(const struct mach_header*,intptr_t);
 /**
  *  mach image add callback
  */
-+ (void)kk_register_add_callback:(kk_mach_image_callback)callback;
-
++ (void)kk_register_image_add_callback:(kk_mach_image_callback)callback;
++ (void)kk_unregister_image_add_callback:(kk_mach_image_callback)callback;
 /**
  *  mach image remove callback
  */
-+ (void)kk_register_remove_callback:(kk_mach_image_callback)callback;
++ (void)kk_register_image_remove_callback:(kk_mach_image_callback)callback;
++ (void)kk_unregister_image_remove_callback:(kk_mach_image_callback)callback;
 
 /**
  *  get loaded mach images

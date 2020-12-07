@@ -16,7 +16,7 @@
 
 @implementation KKThread
 
-+ (NSArray<KKThreadInfo*>*) allThreadInfos {
++ (NSArray<KKThreadInfo*>*) thread_infos {
     kern_return_t kr = KERN_SUCCESS;
     NSMutableArray<KKThreadInfo*>* threadInfos = [NSMutableArray array];
     
