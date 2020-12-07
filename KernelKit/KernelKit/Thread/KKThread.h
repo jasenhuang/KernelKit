@@ -10,17 +10,30 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, KKThreadRunState) {
+    KKThreadStateRunning            = 1,        /* thread is running normally */
+    KKThreadStateStopped            = 2,        /* thread is stopped */
+    KKThreadStateWaitting           = 3,        /* thread is waiting normally */
+    KKThreadStateUnInterruptible    = 4,        /* thread is in an uninterruptible wait */
+    KKThreadStateHalted             = 5,        /* thread is halted at a clean point */
+};
+
 @interface KKThreadInfo : NSObject
 @property(nonatomic) NSString* name;
-@property(nonatomic) time_value_t userTime;
-@property(nonatomic) time_value_t systemTime;
-@property(nonatomic) double cpuUsage;
-@property(nonatomic) NSInteger runState;
-@property(nonatomic) NSInteger suspendCount;
-@property(nonatomic) NSInteger sleepTime;
+@property(nonatomic) time_value_t userTime;         /* user run time */
+@property(nonatomic) time_value_t systemTime;       /* system run time */
+@property(nonatomic) double cpuUsage;               /* scaled cpu usage percentage */
+@property(nonatomic) KKThreadRunState runState;     /* run state */
+@property(nonatomic) NSInteger suspendCount;        /* suspend count for thread */
+@property(nonatomic) NSInteger sleepTime;           /* number of seconds that thread has been sleeping */
 @end
 
 @interface KKThread : NSObject
+
+/**
+ * get all thread infos
+ */
++ (NSArray<KKThreadInfo*>*) allThreadInfos;
 
 @end
 

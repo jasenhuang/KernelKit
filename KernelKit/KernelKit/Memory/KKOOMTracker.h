@@ -13,6 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface KKOOMTracker : NSObject
 
++ (KKOOMTracker*)tracker;
+
+- (void)setup;
+
 @end
 
 #endif
