@@ -54,8 +54,6 @@
     }
     vm_deallocate(mach_thread_self(), (vm_offset_t)threads, thread_count * sizeof(thread_act_array_t));
     
-    
-    
     return threadInfos;
 }
 

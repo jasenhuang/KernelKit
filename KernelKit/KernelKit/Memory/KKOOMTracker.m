@@ -39,6 +39,10 @@
                                              selector:@selector(handleDidBecomeActive:)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleWillTerminate:)
+                                                 name:UIApplicationWillTerminateNotification
+                                               object:nil];
     
     [KKSignalHandler kk_register_signals_callback:^(kk_signal signal) {
         NSLog(@"signal occur");
@@ -54,6 +58,9 @@
     
 }
 
+- (void)handleWillTerminate:(NSNotification*) notif {
+    
+}
 
 
 @end

@@ -24,7 +24,7 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
-    KKOOMTracker* tracker = [KKOOMTracker new];
+    
 }
 
 - (void)testPerformanceExample {

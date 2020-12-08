@@ -123,6 +123,7 @@ void _kk_mem_map_error(NSError** error, int code, id user_info) {
 #if DEBUG
     close(self.fd);
 #endif
+    [KKMemoryMapping kk_munmap_handler:self error:nil];
 }
 
 @end
