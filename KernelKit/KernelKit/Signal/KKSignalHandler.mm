@@ -6,7 +6,7 @@
 //
 
 #import "KKSignalHandler.h"
-#import "KKLog.h"
+#import "KKMacros.h"
 
 typedef void(*kk_sa_handler)(int);
 typedef void(*kk_sa_sigaction)(int, siginfo_t *, void *);

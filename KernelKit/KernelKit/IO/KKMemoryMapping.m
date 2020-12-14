@@ -6,7 +6,7 @@
 //
 
 #import "KKMemoryMapping.h"
-#import "KKLog.h"
+#import "KKMacros.h"
 #include <sys/types.h>
 #include <sys/mman.h>
 #include <sys/stat.h>

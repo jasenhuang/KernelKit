@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5516DA6D2578E34A00C0D268 /* KernelKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 5516DA6B2578E34A00C0D268 /* KernelKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5516DA782578E3D000C0D268 /* KKThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 5516DA762578E3D000C0D268 /* KKThread.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5516DA792578E3D000C0D268 /* KKThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 5516DA772578E3D000C0D268 /* KKThread.m */; };
+		5516DA792578E3D000C0D268 /* KKThread.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5516DA772578E3D000C0D268 /* KKThread.mm */; };
 		5516DA7E2578E41600C0D268 /* KKMemoryMapping.h in Headers */ = {isa = PBXBuildFile; fileRef = 5516DA7C2578E41600C0D268 /* KKMemoryMapping.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5516DA7F2578E41600C0D268 /* KKMemoryMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 5516DA7D2578E41600C0D268 /* KKMemoryMapping.m */; };
 		5516DA882578E44C00C0D268 /* KernelKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5516DA872578E44C00C0D268 /* KernelKitTests.m */; };
@@ -25,8 +25,12 @@
 		5516DAE3257A3E3400C0D268 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 5516DAE1257A3E3400C0D268 /* fishhook.c */; };
 		5516DB0A257E1B8300C0D268 /* KKSignalHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 5516DB08257E1B8300C0D268 /* KKSignalHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5516DB0B257E1B8300C0D268 /* KKSignalHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5516DB09257E1B8300C0D268 /* KKSignalHandler.mm */; };
-		5516DB17257E468600C0D268 /* KKLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 5516DB15257E468600C0D268 /* KKLog.h */; };
+		5516DB17257E468600C0D268 /* KKLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 5516DB15257E468600C0D268 /* KKLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5516DB18257E468600C0D268 /* KKLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 5516DB16257E468600C0D268 /* KKLog.m */; };
+		55239C0D2587897B00369A19 /* KKMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 55239C0B2587897B00369A19 /* KKMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55239C1725878F3600369A19 /* KKAutoreleasePoolPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 55239C1525878F3600369A19 /* KKAutoreleasePoolPage.h */; };
+		55239C1825878F3600369A19 /* KKAutoreleasePoolPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 55239C1625878F3600369A19 /* KKAutoreleasePoolPage.m */; };
+		55239C1E25879F4300369A19 /* KKThreadTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55239C1D25879F4300369A19 /* KKThreadTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +48,7 @@
 		5516DA6B2578E34A00C0D268 /* KernelKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KernelKit.h; sourceTree = "<group>"; };
 		5516DA6C2578E34A00C0D268 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5516DA762578E3D000C0D268 /* KKThread.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKThread.h; sourceTree = "<group>"; };
-		5516DA772578E3D000C0D268 /* KKThread.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKThread.m; sourceTree = "<group>"; };
+		5516DA772578E3D000C0D268 /* KKThread.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = KKThread.mm; sourceTree = "<group>"; };
 		5516DA7C2578E41600C0D268 /* KKMemoryMapping.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKMemoryMapping.h; sourceTree = "<group>"; };
 		5516DA7D2578E41600C0D268 /* KKMemoryMapping.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKMemoryMapping.m; sourceTree = "<group>"; };
 		5516DA852578E44C00C0D268 /* KernelKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KernelKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +67,10 @@
 		5516DB09257E1B8300C0D268 /* KKSignalHandler.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = KKSignalHandler.mm; sourceTree = "<group>"; };
 		5516DB15257E468600C0D268 /* KKLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKLog.h; sourceTree = "<group>"; };
 		5516DB16257E468600C0D268 /* KKLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKLog.m; sourceTree = "<group>"; };
+		55239C0B2587897B00369A19 /* KKMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKMacros.h; sourceTree = "<group>"; };
+		55239C1525878F3600369A19 /* KKAutoreleasePoolPage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKAutoreleasePoolPage.h; sourceTree = "<group>"; };
+		55239C1625878F3600369A19 /* KKAutoreleasePoolPage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKAutoreleasePoolPage.m; sourceTree = "<group>"; };
+		55239C1D25879F4300369A19 /* KKThreadTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKThreadTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,7 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				5516DA762578E3D000C0D268 /* KKThread.h */,
-				5516DA772578E3D000C0D268 /* KKThread.m */,
+				5516DA772578E3D000C0D268 /* KKThread.mm */,
 			);
 			path = Thread;
 			sourceTree = "<group>";
@@ -140,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				5516DA872578E44C00C0D268 /* KernelKitTests.m */,
+				55239C1D25879F4300369A19 /* KKThreadTest.m */,
 				5516DABA257A2BC600C0D268 /* KKMemoryMappingTest.m */,
 				5516DA892578E44C00C0D268 /* Info.plist */,
 			);
@@ -151,6 +160,8 @@
 			children = (
 				5516DA952578E50F00C0D268 /* KKOOMTracker.h */,
 				5516DA962578E50F00C0D268 /* KKOOMTracker.m */,
+				55239C1525878F3600369A19 /* KKAutoreleasePoolPage.h */,
+				55239C1625878F3600369A19 /* KKAutoreleasePoolPage.m */,
 			);
 			path = Memory;
 			sourceTree = "<group>";
@@ -189,6 +200,7 @@
 			children = (
 				5516DB15257E468600C0D268 /* KKLog.h */,
 				5516DB16257E468600C0D268 /* KKLog.m */,
+				55239C0B2587897B00369A19 /* KKMacros.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -200,13 +212,15 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5516DB17257E468600C0D268 /* KKLog.h in Headers */,
 				5516DA782578E3D000C0D268 /* KKThread.h in Headers */,
 				5516DAE2257A3E3400C0D268 /* fishhook.h in Headers */,
 				5516DA6D2578E34A00C0D268 /* KernelKit.h in Headers */,
 				5516DAAA25791E4D00C0D268 /* KKDynamicLinker.h in Headers */,
 				5516DAC5257A2F9500C0D268 /* KKFishHook.h in Headers */,
 				5516DB0A257E1B8300C0D268 /* KKSignalHandler.h in Headers */,
+				5516DB17257E468600C0D268 /* KKLog.h in Headers */,
+				55239C1725878F3600369A19 /* KKAutoreleasePoolPage.h in Headers */,
+				55239C0D2587897B00369A19 /* KKMacros.h in Headers */,
 				5516DA972578E50F00C0D268 /* KKOOMTracker.h in Headers */,
 				5516DA7E2578E41600C0D268 /* KKMemoryMapping.h in Headers */,
 			);
@@ -311,8 +325,9 @@
 				5516DAAB25791E4D00C0D268 /* KKDynamicLinker.mm in Sources */,
 				5516DA982578E50F00C0D268 /* KKOOMTracker.m in Sources */,
 				5516DB18257E468600C0D268 /* KKLog.m in Sources */,
-				5516DA792578E3D000C0D268 /* KKThread.m in Sources */,
+				5516DA792578E3D000C0D268 /* KKThread.mm in Sources */,
 				5516DB0B257E1B8300C0D268 /* KKSignalHandler.mm in Sources */,
+				55239C1825878F3600369A19 /* KKAutoreleasePoolPage.m in Sources */,
 				5516DA7F2578E41600C0D268 /* KKMemoryMapping.m in Sources */,
 				5516DAE3257A3E3400C0D268 /* fishhook.c in Sources */,
 				5516DAC6257A2F9500C0D268 /* KKFishHook.mm in Sources */,
@@ -325,6 +340,7 @@
 			files = (
 				5516DA882578E44C00C0D268 /* KernelKitTests.m in Sources */,
 				5516DABB257A2BC600C0D268 /* KKMemoryMappingTest.m in Sources */,
+				55239C1E25879F4300369A19 /* KKThreadTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -33,7 +33,7 @@ typedef NS_ENUM(NSUInteger, KKThreadRunState) {
 /**
  * get all thread infos
  */
-+ (NSArray<KKThreadInfo*>*)thread_infos;
++ (NSArray<KKThreadInfo*>*)kk_thread_infos;
 
 @end
 
