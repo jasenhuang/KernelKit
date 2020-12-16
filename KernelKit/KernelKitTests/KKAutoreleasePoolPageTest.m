@@ -1,30 +1,21 @@
 //
-//  KKThreadTest.m
+//  KKAutoreleaseTest.m
 //  KernelKitTests
 //
-//  Created by jasenhuang on 2020/12/14.
+//  Created by jasenhuang on 2020/12/16.
 //
 
 #import <XCTest/XCTest.h>
 #import <KernelKit/KernelKit.h>
 
-@interface KKThreadTest : XCTestCase
-@property(nonatomic) NSThread* thread;
+@interface KKAutoreleaseTest : XCTestCase
+
 @end
 
-@implementation KKThreadTest
+@implementation KKAutoreleaseTest
 
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    self.thread =
-    [[NSThread alloc] initWithBlock:^{
-        while (true) {
-            NSLog(@"%@", [KKThread kk_thread_infos]);
-            sleep(1);
-        }
-    }];
-    [self.thread setName:@"me.jasen.KernelKit.KKThread"];
-    [self.thread start];
 }
 
 - (void)tearDown {

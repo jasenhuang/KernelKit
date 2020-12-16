@@ -11,23 +11,6 @@
 #import <mach/mach_types.h>
 #import "KKMacros.h"
 
-static inline bool is_valid_direct_key(tls_key_t k) {
-    return (   k == SYNC_DATA_DIRECT_KEY
-            || k == SYNC_COUNT_DIRECT_KEY
-            || k == AUTORELEASE_POOL_KEY
-            || k == RETURN_DISPOSITION_KEY
-            );
-}
-
-void* kk_get_thread_local_storage(tls_key_t key) {
-    if (!is_valid_direct_key(key)) return NULL;
-    return pthread_getspecific(key);
-}
-
-void kk_set_thread_local_storage(tls_key_t key, void* value) {
-    if (!is_valid_direct_key(key)) return;
-    pthread_setspecific(key, value);
-}
 const NSDictionary* KKThreadNames =
 @{
     @(KKThreadStateRunning)         : @"running",
@@ -37,14 +20,12 @@ const NSDictionary* KKThreadNames =
     @(KKThreadStateHalted)          : @"halted"
 };
 
-@implementation KKThreadInfo
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"name:%@ state:%@ cpu:%@",
-            self.name,
-            KKThreadNames[@(self.runState)],
-            @(self.cpuUsage)];
+inline NSTimeInterval kk_time_value(time_value time) {
+    return time.seconds + (double)time.microseconds / 1000000;
 }
+
+@implementation KKThreadInfo
+
 @end
 
 @implementation KKThread
@@ -56,7 +37,7 @@ const NSDictionary* KKThreadNames =
     /* 当前进程所有线程 */
     thread_array_t threads;
     mach_msg_type_number_t thread_count;
-    kr = task_threads(mach_host_self(), &threads, &thread_count);
+    kr = task_threads(mach_task_self(), &threads, &thread_count);
     if (kr != KERN_SUCCESS) return nil;
     
     char name[256]; /* thread name buffer */
@@ -72,8 +53,8 @@ const NSDictionary* KKThreadNames =
         kr = thread_info(port, THREAD_BASIC_INFO, tinfo, &thread_info_count);
         if (kr != KERN_SUCCESS) break;
         thread_basic_info_t basic_info_th = (thread_basic_info_t)tinfo;
-        info.userTime = basic_info_th->user_time;
-        info.systemTime = basic_info_th->system_time;
+        info.userTime = kk_time_value(basic_info_th->user_time);
+        info.systemTime = kk_time_value(basic_info_th->system_time);
         info.runState = (KKThreadRunState)basic_info_th->run_state;
         info.suspendCount = basic_info_th->suspend_count;
         info.sleepTime = basic_info_th->sleep_time;
@@ -84,6 +65,7 @@ const NSDictionary* KKThreadNames =
         memset(name, 0, sizeof(name));
         pthread_getname_np(thread, name, sizeof(name));
         info.name = [NSString stringWithUTF8String:name];
+        [threadInfos addObject:info];
     }
     vm_deallocate(mach_thread_self(), (vm_offset_t)threads, thread_count * sizeof(thread_act_array_t));
     

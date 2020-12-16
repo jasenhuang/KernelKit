@@ -26,13 +26,3 @@
 #define __PTK_FRAMEWORK_OBJC_KEY7    47
 #define __PTK_FRAMEWORK_OBJC_KEY8    48
 #define __PTK_FRAMEWORK_OBJC_KEY9    49
-
-typedef pthread_key_t tls_key_t;
-/* ObjC runtime tls key */
-#define TLS_DIRECT_KEY        ((tls_key_t)__PTK_FRAMEWORK_OBJC_KEY0)
-#define SYNC_DATA_DIRECT_KEY  ((tls_key_t)__PTK_FRAMEWORK_OBJC_KEY1)
-#define SYNC_COUNT_DIRECT_KEY ((tls_key_t)__PTK_FRAMEWORK_OBJC_KEY2)
-#define AUTORELEASE_POOL_KEY  ((tls_key_t)__PTK_FRAMEWORK_OBJC_KEY3)
-#define RETURN_DISPOSITION_KEY ((tls_key_t)__PTK_FRAMEWORK_OBJC_KEY4)
-
-#import "KKLog.h"

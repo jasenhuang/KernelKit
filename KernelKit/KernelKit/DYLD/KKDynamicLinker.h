@@ -7,17 +7,18 @@
 
 #import <Foundation/Foundation.h>
 #import <mach-o/loader.h>
+#import <KernelKit/KKDescribable.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface KKDLInfo : NSObject
+@interface KKDLInfo : KKDescribable
 @property(nonatomic) NSString* fname;       /* Pathname of shared object */
 @property(nonatomic) void* fbase;           /* Base address of shared object */
 @property(nonatomic) NSString* sname;       /* Name of nearest symbol */
 @property(nonatomic) void* saddr;           /* Address of nearest symbol */
 @end
 
-@interface KKMachInfo : NSObject
+@interface KKMachInfo : KKDescribable
 @property(nonatomic) NSString* name;
 @property(nonatomic) const struct mach_header* header;
 @property(nonatomic) NSUInteger vmaddr_slice;

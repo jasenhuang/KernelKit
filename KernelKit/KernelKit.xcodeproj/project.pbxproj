@@ -28,9 +28,15 @@
 		5516DB17257E468600C0D268 /* KKLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 5516DB15257E468600C0D268 /* KKLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5516DB18257E468600C0D268 /* KKLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 5516DB16257E468600C0D268 /* KKLog.m */; };
 		55239C0D2587897B00369A19 /* KKMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 55239C0B2587897B00369A19 /* KKMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		55239C1725878F3600369A19 /* KKAutoreleasePoolPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 55239C1525878F3600369A19 /* KKAutoreleasePoolPage.h */; };
-		55239C1825878F3600369A19 /* KKAutoreleasePoolPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 55239C1625878F3600369A19 /* KKAutoreleasePoolPage.m */; };
+		55239C1725878F3600369A19 /* KKAutoreleasePoolPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 55239C1525878F3600369A19 /* KKAutoreleasePoolPage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55239C1825878F3600369A19 /* KKAutoreleasePoolPage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55239C1625878F3600369A19 /* KKAutoreleasePoolPage.mm */; };
 		55239C1E25879F4300369A19 /* KKThreadTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55239C1D25879F4300369A19 /* KKThreadTest.m */; };
+		556967CE2589DEA700B52BA7 /* NSObject-internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 556967CD2589DEA700B52BA7 /* NSObject-internal.h */; };
+		5569680A2589F5BD00B52BA7 /* NSObject-internal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 556968092589F5BD00B52BA7 /* NSObject-internal.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5569681E258A038200B52BA7 /* KKAutoreleasePoolPageTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5569681D258A038200B52BA7 /* KKAutoreleasePoolPageTest.m */; };
+		55696824258A084F00B52BA7 /* KKDynamicLinkerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55696823258A084F00B52BA7 /* KKDynamicLinkerTest.m */; };
+		55696829258A0D6000B52BA7 /* KKDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 55696827258A0D6000B52BA7 /* KKDescribable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5569682A258A0D6000B52BA7 /* KKDescribable.m in Sources */ = {isa = PBXBuildFile; fileRef = 55696828258A0D6000B52BA7 /* KKDescribable.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,8 +75,14 @@
 		5516DB16257E468600C0D268 /* KKLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKLog.m; sourceTree = "<group>"; };
 		55239C0B2587897B00369A19 /* KKMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKMacros.h; sourceTree = "<group>"; };
 		55239C1525878F3600369A19 /* KKAutoreleasePoolPage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKAutoreleasePoolPage.h; sourceTree = "<group>"; };
-		55239C1625878F3600369A19 /* KKAutoreleasePoolPage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKAutoreleasePoolPage.m; sourceTree = "<group>"; };
+		55239C1625878F3600369A19 /* KKAutoreleasePoolPage.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = KKAutoreleasePoolPage.mm; sourceTree = "<group>"; };
 		55239C1D25879F4300369A19 /* KKThreadTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKThreadTest.m; sourceTree = "<group>"; };
+		556967CD2589DEA700B52BA7 /* NSObject-internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject-internal.h"; sourceTree = "<group>"; };
+		556968092589F5BD00B52BA7 /* NSObject-internal.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSObject-internal.mm"; sourceTree = "<group>"; };
+		5569681D258A038200B52BA7 /* KKAutoreleasePoolPageTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKAutoreleasePoolPageTest.m; sourceTree = "<group>"; };
+		55696823258A084F00B52BA7 /* KKDynamicLinkerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKDynamicLinkerTest.m; sourceTree = "<group>"; };
+		55696827258A0D6000B52BA7 /* KKDescribable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKDescribable.h; sourceTree = "<group>"; };
+		55696828258A0D6000B52BA7 /* KKDescribable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKDescribable.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +125,7 @@
 		5516DA6A2578E34A00C0D268 /* KernelKit */ = {
 			isa = PBXGroup;
 			children = (
+				556967CC2589DEA700B52BA7 /* Private */,
 				5516DB14257E466E00C0D268 /* Utils */,
 				5516DB07257E1B6800C0D268 /* Signal */,
 				5516DAC2257A2F5100C0D268 /* Hook */,
@@ -150,6 +163,8 @@
 				5516DA872578E44C00C0D268 /* KernelKitTests.m */,
 				55239C1D25879F4300369A19 /* KKThreadTest.m */,
 				5516DABA257A2BC600C0D268 /* KKMemoryMappingTest.m */,
+				5569681D258A038200B52BA7 /* KKAutoreleasePoolPageTest.m */,
+				55696823258A084F00B52BA7 /* KKDynamicLinkerTest.m */,
 				5516DA892578E44C00C0D268 /* Info.plist */,
 			);
 			path = KernelKitTests;
@@ -161,7 +176,7 @@
 				5516DA952578E50F00C0D268 /* KKOOMTracker.h */,
 				5516DA962578E50F00C0D268 /* KKOOMTracker.m */,
 				55239C1525878F3600369A19 /* KKAutoreleasePoolPage.h */,
-				55239C1625878F3600369A19 /* KKAutoreleasePoolPage.m */,
+				55239C1625878F3600369A19 /* KKAutoreleasePoolPage.mm */,
 			);
 			path = Memory;
 			sourceTree = "<group>";
@@ -201,8 +216,19 @@
 				5516DB15257E468600C0D268 /* KKLog.h */,
 				5516DB16257E468600C0D268 /* KKLog.m */,
 				55239C0B2587897B00369A19 /* KKMacros.h */,
+				55696827258A0D6000B52BA7 /* KKDescribable.h */,
+				55696828258A0D6000B52BA7 /* KKDescribable.m */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		556967CC2589DEA700B52BA7 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				556967CD2589DEA700B52BA7 /* NSObject-internal.h */,
+				556968092589F5BD00B52BA7 /* NSObject-internal.mm */,
+			);
+			path = Private;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,8 +245,10 @@
 				5516DAC5257A2F9500C0D268 /* KKFishHook.h in Headers */,
 				5516DB0A257E1B8300C0D268 /* KKSignalHandler.h in Headers */,
 				5516DB17257E468600C0D268 /* KKLog.h in Headers */,
-				55239C1725878F3600369A19 /* KKAutoreleasePoolPage.h in Headers */,
+				556967CE2589DEA700B52BA7 /* NSObject-internal.h in Headers */,
+				55696829258A0D6000B52BA7 /* KKDescribable.h in Headers */,
 				55239C0D2587897B00369A19 /* KKMacros.h in Headers */,
+				55239C1725878F3600369A19 /* KKAutoreleasePoolPage.h in Headers */,
 				5516DA972578E50F00C0D268 /* KKOOMTracker.h in Headers */,
 				5516DA7E2578E41600C0D268 /* KKMemoryMapping.h in Headers */,
 			);
@@ -323,13 +351,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				5516DAAB25791E4D00C0D268 /* KKDynamicLinker.mm in Sources */,
+				5569682A258A0D6000B52BA7 /* KKDescribable.m in Sources */,
 				5516DA982578E50F00C0D268 /* KKOOMTracker.m in Sources */,
 				5516DB18257E468600C0D268 /* KKLog.m in Sources */,
 				5516DA792578E3D000C0D268 /* KKThread.mm in Sources */,
 				5516DB0B257E1B8300C0D268 /* KKSignalHandler.mm in Sources */,
-				55239C1825878F3600369A19 /* KKAutoreleasePoolPage.m in Sources */,
+				55239C1825878F3600369A19 /* KKAutoreleasePoolPage.mm in Sources */,
 				5516DA7F2578E41600C0D268 /* KKMemoryMapping.m in Sources */,
 				5516DAE3257A3E3400C0D268 /* fishhook.c in Sources */,
+				5569680A2589F5BD00B52BA7 /* NSObject-internal.mm in Sources */,
 				5516DAC6257A2F9500C0D268 /* KKFishHook.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,7 +369,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5516DA882578E44C00C0D268 /* KernelKitTests.m in Sources */,
+				5569681E258A038200B52BA7 /* KKAutoreleasePoolPageTest.m in Sources */,
 				5516DABB257A2BC600C0D268 /* KKMemoryMappingTest.m in Sources */,
+				55696824258A084F00B52BA7 /* KKDynamicLinkerTest.m in Sources */,
 				55239C1E25879F4300369A19 /* KKThreadTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

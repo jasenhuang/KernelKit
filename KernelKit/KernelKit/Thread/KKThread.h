@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <mach/time_value.h>
+#import <KernelKit/KKDescribable.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,10 +18,10 @@ typedef NS_ENUM(NSUInteger, KKThreadRunState) {
     KKThreadStateHalted             = 5,        /* thread is halted at a clean point */
 };
 
-@interface KKThreadInfo : NSObject
+@interface KKThreadInfo : KKDescribable
 @property(nonatomic) NSString* name;
-@property(nonatomic) time_value_t userTime;         /* user run time */
-@property(nonatomic) time_value_t systemTime;       /* system run time */
+@property(nonatomic) NSTimeInterval userTime;         /* user run time */
+@property(nonatomic) NSTimeInterval systemTime;       /* system run time */
 @property(nonatomic) double cpuUsage;               /* scaled cpu usage percentage */
 @property(nonatomic) KKThreadRunState runState;     /* run state */
 @property(nonatomic) NSInteger suspendCount;        /* suspend count for thread */

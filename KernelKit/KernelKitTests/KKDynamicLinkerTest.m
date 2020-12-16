@@ -1,30 +1,21 @@
 //
-//  KKThreadTest.m
+//  KKDynamicLinkerTest.m
 //  KernelKitTests
 //
-//  Created by jasenhuang on 2020/12/14.
+//  Created by jasenhuang on 2020/12/16.
 //
 
 #import <XCTest/XCTest.h>
 #import <KernelKit/KernelKit.h>
 
-@interface KKThreadTest : XCTestCase
-@property(nonatomic) NSThread* thread;
+@interface KKDynamicLinkerTest : XCTestCase
+
 @end
 
-@implementation KKThreadTest
+@implementation KKDynamicLinkerTest
 
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    self.thread =
-    [[NSThread alloc] initWithBlock:^{
-        while (true) {
-            NSLog(@"%@", [KKThread kk_thread_infos]);
-            sleep(1);
-        }
-    }];
-    [self.thread setName:@"me.jasen.KernelKit.KKThread"];
-    [self.thread start];
 }
 
 - (void)tearDown {
@@ -34,6 +25,10 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
+    NSLog(@"%@", [KKDynamicLinker kk_get_loaded_mach_images]);
+    [KKDynamicLinker kk_register_image_add_callback:^(const struct mach_header * _Nonnull header, intptr_t slide) {
+        //NSLog(@"%p", header);
+    }];
 }
 
 - (void)testPerformanceExample {
