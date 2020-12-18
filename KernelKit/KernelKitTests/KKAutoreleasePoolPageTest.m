@@ -7,6 +7,7 @@
 
 #import <XCTest/XCTest.h>
 #import <KernelKit/KernelKit.h>
+#include <malloc/malloc.h>
 
 @interface KKAutoreleaseTest : XCTestCase
 
@@ -25,6 +26,10 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
+//    for (NSInteger i = 0 ; i < 1000000; ++i) {
+//        malloc_zone_memalign(malloc_default_zone(), 4096, 4096);
+//    }
+//    sleep(100);
 }
 
 - (void)testPerformanceExample {

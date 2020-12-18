@@ -26,9 +26,19 @@ typedef void(^kk_signal_callback)(kk_signal);
 + (void)kk_register_signal:(kk_signal)signal callback:(kk_signal_callback)callback;
 
 /**
- * register callback for common fatal signal
+ * unregister callback for signal
+ */
++ (void)kk_unregister_signal:(kk_signal)signal callback:(kk_signal_callback)callback;
+
+/**
+ * register callback for common fatal signals
  */
 + (void)kk_register_signals_callback:(kk_signal_callback)callback;
+
+/**
+ * unregister callback for common fatal signals
+ */
++ (void)kk_unregister_signals_callback:(kk_signal_callback)callback;
 
 @end
 

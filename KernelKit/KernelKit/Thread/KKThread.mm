@@ -28,11 +28,33 @@ inline NSTimeInterval kk_time_value(time_value time) {
 
 @end
 
+@interface KKThread()
+@property(nonatomic, readwrite) mach_port_t port;
+@end
+
 @implementation KKThread
 
-+ (NSArray<KKThreadInfo*>*) kk_thread_infos {
+- (NSString*)name {
+    char name[256]; /* thread name buffer */
+    memset(name, 0, sizeof(name));
+    pthread_getname_np(self.thread, name, sizeof(name));
+    return [NSString stringWithUTF8String:name];
+}
+
+- (void)setName:(NSString *)name {
+    pthread_setname_np(name);
+}
+
+- (pthread_t)thread {
+    return pthread_from_mach_thread_np(self.port);
+}
+
+/**
+ * get all threads
+ */
++ (NSArray<KKThread*>*)kk_all_threads {
     kern_return_t kr = KERN_SUCCESS;
-    NSMutableArray<KKThreadInfo*>* threadInfos = [NSMutableArray array];
+    NSMutableArray<KKThread*>* kkThreads = [NSMutableArray array];
     
     /* 当前进程所有线程 */
     thread_array_t threads;
@@ -40,36 +62,53 @@ inline NSTimeInterval kk_time_value(time_value time) {
     kr = task_threads(mach_task_self(), &threads, &thread_count);
     if (kr != KERN_SUCCESS) return nil;
     
-    char name[256]; /* thread name buffer */
-    
-    KKThreadInfo* info;
+    KKThread* kkThread;
     for (uint32_t i = 0; i < thread_count; ++i) {
-        info = [KKThreadInfo new];
-        thread_act_t port = threads[i];
-        
-        /* basic info */
-        integer_t tinfo[128];
-        mach_msg_type_number_t thread_info_count;
-        kr = thread_info(port, THREAD_BASIC_INFO, tinfo, &thread_info_count);
-        if (kr != KERN_SUCCESS) break;
-        thread_basic_info_t basic_info_th = (thread_basic_info_t)tinfo;
-        info.userTime = kk_time_value(basic_info_th->user_time);
-        info.systemTime = kk_time_value(basic_info_th->system_time);
-        info.runState = (KKThreadRunState)basic_info_th->run_state;
-        info.suspendCount = basic_info_th->suspend_count;
-        info.sleepTime = basic_info_th->sleep_time;
-        info.cpuUsage = basic_info_th->cpu_usage / TH_USAGE_SCALE;
-        
-        /* name */
-        pthread_t thread = pthread_from_mach_thread_np(port);
-        memset(name, 0, sizeof(name));
-        pthread_getname_np(thread, name, sizeof(name));
-        info.name = [NSString stringWithUTF8String:name];
-        [threadInfos addObject:info];
+        kkThread = [[KKThread alloc] init];
+        kkThread.port = threads[i];
+        [kkThreads addObject:kkThread];
     }
     vm_deallocate(mach_thread_self(), (vm_offset_t)threads, thread_count * sizeof(thread_act_array_t));
     
-    return threadInfos;
+    return kkThreads;
 }
 
+/**
+ * thread detail infos
+ */
+- (KKThreadInfo*)threadInfos {
+    kern_return_t kr = KERN_SUCCESS;
+    KKThreadInfo* info = [[KKThreadInfo alloc] init];
+    
+    /* basic info */
+    integer_t tinfo[128];
+    mach_msg_type_number_t thread_info_count;
+    kr = thread_info(self.port, THREAD_BASIC_INFO, tinfo, &thread_info_count);
+    if (kr != KERN_SUCCESS) return nil;
+    
+    thread_basic_info_t basic_info_th = (thread_basic_info_t)tinfo;
+    info.name = self.name;
+    info.userTime = kk_time_value(basic_info_th->user_time);
+    info.systemTime = kk_time_value(basic_info_th->system_time);
+    info.runState = (KKThreadRunState)basic_info_th->run_state;
+    info.suspendCount = basic_info_th->suspend_count;
+    info.sleepTime = basic_info_th->sleep_time;
+    info.cpuUsage = basic_info_th->cpu_usage / TH_USAGE_SCALE;
+    
+    return info;
+}
+
+/**
+ * suspend thread
+ */
+- (void)suspend {
+    
+}
+
+/**
+ * resume thread
+ */
+- (void)resume {
+    
+}
 @end

@@ -37,6 +37,9 @@
 		55696824258A084F00B52BA7 /* KKDynamicLinkerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55696823258A084F00B52BA7 /* KKDynamicLinkerTest.m */; };
 		55696829258A0D6000B52BA7 /* KKDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 55696827258A0D6000B52BA7 /* KKDescribable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5569682A258A0D6000B52BA7 /* KKDescribable.m in Sources */ = {isa = PBXBuildFile; fileRef = 55696828258A0D6000B52BA7 /* KKDescribable.m */; };
+		55696830258A3F7500B52BA7 /* KKSignalHandlerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5569682F258A3F7500B52BA7 /* KKSignalHandlerTest.m */; };
+		55696835258B877900B52BA7 /* KKCrashHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 55696833258B877900B52BA7 /* KKCrashHandler.h */; };
+		55696836258B877900B52BA7 /* KKCrashHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 55696834258B877900B52BA7 /* KKCrashHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +86,9 @@
 		55696823258A084F00B52BA7 /* KKDynamicLinkerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKDynamicLinkerTest.m; sourceTree = "<group>"; };
 		55696827258A0D6000B52BA7 /* KKDescribable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKDescribable.h; sourceTree = "<group>"; };
 		55696828258A0D6000B52BA7 /* KKDescribable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKDescribable.m; sourceTree = "<group>"; };
+		5569682F258A3F7500B52BA7 /* KKSignalHandlerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKSignalHandlerTest.m; sourceTree = "<group>"; };
+		55696833258B877900B52BA7 /* KKCrashHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKCrashHandler.h; sourceTree = "<group>"; };
+		55696834258B877900B52BA7 /* KKCrashHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKCrashHandler.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +133,7 @@
 			children = (
 				556967CC2589DEA700B52BA7 /* Private */,
 				5516DB14257E466E00C0D268 /* Utils */,
-				5516DB07257E1B6800C0D268 /* Signal */,
+				5516DB07257E1B6800C0D268 /* Crash */,
 				5516DAC2257A2F5100C0D268 /* Hook */,
 				5516DAA725791E0D00C0D268 /* DYLD */,
 				5516DA942578E4FC00C0D268 /* Memory */,
@@ -165,6 +171,7 @@
 				5516DABA257A2BC600C0D268 /* KKMemoryMappingTest.m */,
 				5569681D258A038200B52BA7 /* KKAutoreleasePoolPageTest.m */,
 				55696823258A084F00B52BA7 /* KKDynamicLinkerTest.m */,
+				5569682F258A3F7500B52BA7 /* KKSignalHandlerTest.m */,
 				5516DA892578E44C00C0D268 /* Info.plist */,
 			);
 			path = KernelKitTests;
@@ -201,13 +208,15 @@
 			path = Hook;
 			sourceTree = "<group>";
 		};
-		5516DB07257E1B6800C0D268 /* Signal */ = {
+		5516DB07257E1B6800C0D268 /* Crash */ = {
 			isa = PBXGroup;
 			children = (
 				5516DB08257E1B8300C0D268 /* KKSignalHandler.h */,
 				5516DB09257E1B8300C0D268 /* KKSignalHandler.mm */,
+				55696833258B877900B52BA7 /* KKCrashHandler.h */,
+				55696834258B877900B52BA7 /* KKCrashHandler.m */,
 			);
-			path = Signal;
+			path = Crash;
 			sourceTree = "<group>";
 		};
 		5516DB14257E466E00C0D268 /* Utils */ = {
@@ -247,6 +256,7 @@
 				5516DB17257E468600C0D268 /* KKLog.h in Headers */,
 				556967CE2589DEA700B52BA7 /* NSObject-internal.h in Headers */,
 				55696829258A0D6000B52BA7 /* KKDescribable.h in Headers */,
+				55696835258B877900B52BA7 /* KKCrashHandler.h in Headers */,
 				55239C0D2587897B00369A19 /* KKMacros.h in Headers */,
 				55239C1725878F3600369A19 /* KKAutoreleasePoolPage.h in Headers */,
 				5516DA972578E50F00C0D268 /* KKOOMTracker.h in Headers */,
@@ -354,6 +364,7 @@
 				5569682A258A0D6000B52BA7 /* KKDescribable.m in Sources */,
 				5516DA982578E50F00C0D268 /* KKOOMTracker.m in Sources */,
 				5516DB18257E468600C0D268 /* KKLog.m in Sources */,
+				55696836258B877900B52BA7 /* KKCrashHandler.m in Sources */,
 				5516DA792578E3D000C0D268 /* KKThread.mm in Sources */,
 				5516DB0B257E1B8300C0D268 /* KKSignalHandler.mm in Sources */,
 				55239C1825878F3600369A19 /* KKAutoreleasePoolPage.mm in Sources */,
@@ -368,6 +379,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55696830258A3F7500B52BA7 /* KKSignalHandlerTest.m in Sources */,
 				5516DA882578E44C00C0D268 /* KernelKitTests.m in Sources */,
 				5569681E258A038200B52BA7 /* KKAutoreleasePoolPageTest.m in Sources */,
 				5516DABB257A2BC600C0D268 /* KKMemoryMappingTest.m in Sources */,

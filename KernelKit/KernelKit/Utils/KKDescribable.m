@@ -9,39 +9,34 @@
 #import <objc/runtime.h>
 
 @implementation KKDescribable
-static NSMutableDictionary* PROPERTIES_CACHE ;
+
 - (NSString *)description
 {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        PROPERTIES_CACHE = @{}.mutableCopy;
-    });
-    
-    if (!PROPERTIES_CACHE[NSStringFromClass(self.class)]){
-        unsigned int count;
-        objc_property_t* properties = class_copyPropertyList(self.class, &count);
-        NSMutableArray* names = [[NSMutableArray alloc] initWithCapacity:count];
-        for (unsigned int i = 0; i < count; ++i) {
-            const char* attr = property_getAttributes(properties[i]);
-            
-            /* raw pointer not support valueForKey */
-            if (strstr(attr, "^")) continue;
-            
-            [names addObject:
-             [NSString stringWithFormat:@"%s",
-              property_getName(properties[i])]];
-        }
-        free(properties);
-        PROPERTIES_CACHE[NSStringFromClass(self.class)] = names;
-    }
-    NSArray* propertyNames = PROPERTIES_CACHE[NSStringFromClass(self.class)];
-    
     NSMutableString* desc = [NSMutableString string];
     [desc appendString:@"{"];
-    for (NSString* name in propertyNames) {
+    
+    unsigned int count;
+    Ivar* ivars = class_copyIvarList(self.class, &count);
+    for (unsigned int i = 0; i < count; ++i) {
         if (desc.length) [desc appendString:@"\r        "];
-        [desc appendFormat:@"%@:%@", name, [self valueForKey:name]];
+        
+        const char* name = ivar_getName(ivars[i]);
+        const char* encoding = ivar_getTypeEncoding(ivars[i]);
+        
+        ptrdiff_t offset = ivar_getOffset(ivars[i]);
+        void **location = (void**)((__bridge void *)self + offset);
+        
+        /* raw pointer not support valueForKey */
+        if (strstr(encoding, "^")) {
+            [desc appendFormat:@"%s:%p", name, *location];
+        } else if (strstr(encoding, "@")) {
+            [desc appendFormat:@"%s:%@", name, (__bridge id)(*location)];
+        } else{
+            NSString* property = [NSString stringWithFormat:@"%s", name];
+            [desc appendFormat:@"%s:%@", name, [self valueForKey:property]];
+        }
     }
+    free(ivars);
     [desc appendString:@"\r    }"];
     return desc;
 }

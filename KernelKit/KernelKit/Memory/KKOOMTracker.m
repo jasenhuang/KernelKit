@@ -62,7 +62,25 @@
     
 }
 
-
+- (void)resetTracker
+{
+//    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+//    
+//    NSString *currentOSVersion = [self currentOSVersion];
+//    if (currentOSVersion) {
+//        [userDefault setObject:currentOSVersion forKey:@"lastOSVersion"];
+//    }
+//    
+//    NSTimeInterval bootTime = [[self dateWithSystemboot] timeIntervalSince1970];
+//    if (bootTime) {
+//        [userDefault setObject:@(bootTime) forKey:@"lastOSBootTime"];
+//    }
+//    
+//    NSString *currentAPPVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+//    if (currentAPPVersion.length) {
+//        [userDefault setObject:currentAPPVersion forKey:@"appVersion"];
+//    }
+}
 @end
 
 #endif

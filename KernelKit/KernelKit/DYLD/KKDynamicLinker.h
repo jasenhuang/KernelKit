@@ -11,6 +11,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+struct test_t  {
+    int a;
+    int b;
+};
+
 @interface KKDLInfo : KKDescribable
 @property(nonatomic) NSString* fname;       /* Pathname of shared object */
 @property(nonatomic) void* fbase;           /* Base address of shared object */
@@ -22,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic) NSString* name;
 @property(nonatomic) const struct mach_header* header;
 @property(nonatomic) NSUInteger vmaddr_slice;
+@property(nonatomic) struct test_t test;
 @end
 
 typedef void(^kk_mach_image_callback)(const struct mach_header*,intptr_t);

@@ -20,20 +20,37 @@ typedef NS_ENUM(NSUInteger, KKThreadRunState) {
 
 @interface KKThreadInfo : KKDescribable
 @property(nonatomic) NSString* name;
-@property(nonatomic) NSTimeInterval userTime;         /* user run time */
-@property(nonatomic) NSTimeInterval systemTime;       /* system run time */
-@property(nonatomic) double cpuUsage;               /* scaled cpu usage percentage */
-@property(nonatomic) KKThreadRunState runState;     /* run state */
-@property(nonatomic) NSInteger suspendCount;        /* suspend count for thread */
-@property(nonatomic) NSInteger sleepTime;           /* number of seconds that thread has been sleeping */
+@property(nonatomic) double cpuUsage;                   /* scaled cpu usage percentage */
+@property(nonatomic) NSTimeInterval userTime;           /* user run time */
+@property(nonatomic) NSTimeInterval systemTime;         /* system run time */
+@property(nonatomic) KKThreadRunState runState;         /* run state */
+@property(nonatomic) NSInteger suspendCount;            /* suspend count for thread */
+@property(nonatomic) NSInteger sleepTime;               /* number of seconds that thread has been sleeping */
 @end
 
-@interface KKThread : NSObject
+@interface KKThread : KKDescribable
+@property(nonatomic) NSString* name;
+@property(nonatomic, readonly) pthread_t thread;
 
 /**
- * get all thread infos
+ * get all threads
  */
-+ (NSArray<KKThreadInfo*>*)kk_thread_infos;
++ (NSArray<KKThread*>*)kk_all_threads;
+
+/**
+ * thread detail infos
+ */
+- (KKThreadInfo*)threadInfos;
+
+/**
+ * suspend thread
+ */
+- (void)suspend;
+
+/**
+ * resume thread
+ */
+- (void)resume;
 
 @end
 
