@@ -19,7 +19,7 @@
     self.thread =
     [[NSThread alloc] initWithBlock:^{
         while (true) {
-            NSArray* threads = [KKThread kk_all_threads];
+            NSArray* threads = kk_all_threads();
             for (KKThread* thread in threads) {
                 NSLog(@"%@", thread.threadInfos);
             }

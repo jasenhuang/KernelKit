@@ -23,8 +23,6 @@ void _kk_mem_map_error(NSError** error, int code, id user_info) {
     }
 }
 
-@class KKMemoryMapping;
-
 @interface KKMemoryMappingHandler()
 @property(nonatomic, readwrite) NSURL* fileURL;
 @property(nonatomic, copy, readwrite) NSDictionary* options;
@@ -104,7 +102,7 @@ void _kk_mem_map_error(NSError** error, int code, id user_info) {
     if (!_pointer) return NO;
     
     NSError* error;
-    if (![KKMemoryMapping kk_munmap_handler:self error:&error]){
+    if (!kk_munmap_handler(self, &error)){
         return NO;
     };
     
@@ -112,7 +110,7 @@ void _kk_mem_map_error(NSError** error, int code, id user_info) {
         return NO;
     }
     
-    if (![KKMemoryMapping kk_mmap_handler:self error:&error]){
+    if (!kk_mmap_handler(self, &error)){
         return NO;
     }
     
@@ -123,24 +121,21 @@ void _kk_mem_map_error(NSError** error, int code, id user_info) {
 #if DEBUG
     close(self.fd);
 #endif
-    [KKMemoryMapping kk_munmap_handler:self error:nil];
+    kk_munmap_handler(self, nil);
 }
 
 @end
 
-@implementation KKMemoryMapping
 
-+ (KKMemoryMappingHandler*)kk_mmap:(NSURL*)fileURL
-                           options:(nullable NSDictionary*)options
-                             error:(out NSError**)error {
+KKMemoryMappingHandler* kk_mmap(NSURL* fileURL, NSDictionary* options, NSError** error) {
     KKMemoryMappingHandler* handler = [[KKMemoryMappingHandler alloc] initWithFileURL:fileURL options:options];
-    if (![KKMemoryMapping kk_mmap_handler:handler error:error]){
+    if (!kk_mmap_handler(handler, error)){
         return nil;
     }
     return handler;
 }
 
-+ (BOOL)kk_mmap_handler:(KKMemoryMappingHandler*)handler error:(NSError**)error {
+bool kk_mmap_handler(KKMemoryMappingHandler* handler, NSError** error) {
     if (!handler.fileURL.isFileURL || !handler.fileURL.path.length) {
         _kk_mem_map_error(error, -1, @{@"msg":@"fileURL is empty"});
         return NO;
@@ -188,7 +183,7 @@ void _kk_mem_map_error(NSError** error, int code, id user_info) {
     return YES;
 }
 
-+ (BOOL)kk_msync_handler:(KKMemoryMappingHandler*)handler error:(NSError**)error {
+bool kk_msync_handler(KKMemoryMappingHandler* handler, NSError** error) {
     if (!handler.pointer) return NO;
     
     int code = msync(handler.pointer, handler.fileRange.length, MS_ASYNC);
@@ -198,7 +193,7 @@ void _kk_mem_map_error(NSError** error, int code, id user_info) {
     return !code;
 }
 
-+ (BOOL)kk_munmap_handler:(KKMemoryMappingHandler*)handler error:(NSError**)error {
+bool kk_munmap_handler(KKMemoryMappingHandler* handler, NSError** error) {
     if (!handler.pointer) return NO;
     int code = munmap(handler.pointer, handler.fileRange.length);
     if (code) {
@@ -210,5 +205,3 @@ void _kk_mem_map_error(NSError** error, int code, id user_info) {
 #endif
     return !code;
 }
-
-@end

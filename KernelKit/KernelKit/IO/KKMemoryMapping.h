@@ -6,8 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-NS_ASSUME_NONNULL_BEGIN
+#import <KernelKit/KKMacros.h>
 
 typedef NS_OPTIONS(NSUInteger, KK_MEM_PROT_MODE) {
     KK_MEM_PROT_NONE        = 0,        /* [MC2] no permissions */
@@ -28,6 +27,39 @@ typedef NS_OPTIONS(NSUInteger, KK_MEM_MAP_TYPE) {
 };
 
 extern NSString* const KKMemoryMappingDomain;
+
+@class KKMemoryMappingHandler;
+
+/**
+ * mmap file at fileURL and return handler
+ * options:
+ *  offset -> mapping file offset
+ *  size -> mapping length (default: file size or PAGE_SIZE)
+ *  prot -> KK_MEM_PROT_MODE (default: KK_MEM_PROT_READ | KK_MEM_PROT_WRITE)
+ *  flags -> KK_MEM_SHARE_TYPE | KK_MEM_MAP_TYPE (default: KK_MEM_SHARE_SHARED)
+ *
+ */
+KK_EXTERN_C_BEGIN
+
+KKMemoryMappingHandler* kk_mmap(NSURL* fileURL, NSDictionary* options, NSError** error);
+
+/**
+ * remmap
+ */
+bool kk_mmap_handler(KKMemoryMappingHandler* handler, NSError** error);
+
+/**
+ * msync
+ */
+bool kk_msync_handler(KKMemoryMappingHandler* handler, NSError** error);
+
+/**
+ * munmap
+ */
+bool kk_munmap_handler(KKMemoryMappingHandler* handler, NSError** error);
+
+KK_EXTERN_C_END
+
 
 @interface KKMemoryMappingHandler : NSObject
 @property(nonatomic, readonly) NSURL* fileURL;
@@ -57,37 +89,3 @@ extern NSString* const KKMemoryMappingDomain;
 - (BOOL)appendData:(NSData*)data;
 
 @end
-
-@interface KKMemoryMapping : NSObject
-
-/**
- * mmap file at fileURL and return handler
- * options:
- *  offset -> mapping file offset
- *  size -> mapping length (default: file size or PAGE_SIZE)
- *  prot -> KK_MEM_PROT_MODE (default: KK_MEM_PROT_READ | KK_MEM_PROT_WRITE)
- *  flags -> KK_MEM_SHARE_TYPE | KK_MEM_MAP_TYPE (default: KK_MEM_SHARE_SHARED)
- *
- */
-+ (KKMemoryMappingHandler*)kk_mmap:(NSURL*)fileURL
-                           options:(nullable NSDictionary*)options
-                             error:(out NSError**)error;
-
-/**
- * remmap
- */
-+ (BOOL)kk_mmap_handler:(KKMemoryMappingHandler*)handler error:(NSError**)error;
-
-/**
- * msync
- */
-+ (BOOL)kk_msync_handler:(KKMemoryMappingHandler*)handler error:(NSError**)error;
-
-/**
- * munmap
- */
-+ (BOOL)kk_munmap_handler:(KKMemoryMappingHandler*)handler error:(NSError**)error;
-
-@end
-
-NS_ASSUME_NONNULL_END

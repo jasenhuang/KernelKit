@@ -29,7 +29,7 @@
 - (void)setup {
     NSString* docPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
     NSURL* fileURL = [NSURL fileURLWithPath:[docPath stringByAppendingPathComponent:@"oom.tracker"]];
-    self.mapHandler = [KKMemoryMapping kk_mmap:fileURL options:nil error:nil];
+    self.mapHandler = kk_mmap(fileURL, nil, nil);
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleDidEnterBackground:)
@@ -44,10 +44,10 @@
                                                  name:UIApplicationWillTerminateNotification
                                                object:nil];
     
-    [KKSignalHandler kk_register_signals_callback:^(kk_signal signal) {
+    kk_register_signals_callback(^(kk_signal signal) {
         NSLog(@"signal occur");
         
-    }];
+    });
 }
 
 - (void)handleDidEnterBackground:(NSNotification*) notif {

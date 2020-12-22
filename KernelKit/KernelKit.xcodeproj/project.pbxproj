@@ -38,7 +38,7 @@
 		55696829258A0D6000B52BA7 /* KKDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 55696827258A0D6000B52BA7 /* KKDescribable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5569682A258A0D6000B52BA7 /* KKDescribable.m in Sources */ = {isa = PBXBuildFile; fileRef = 55696828258A0D6000B52BA7 /* KKDescribable.m */; };
 		55696830258A3F7500B52BA7 /* KKSignalHandlerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5569682F258A3F7500B52BA7 /* KKSignalHandlerTest.m */; };
-		55696835258B877900B52BA7 /* KKCrashHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 55696833258B877900B52BA7 /* KKCrashHandler.h */; };
+		55696835258B877900B52BA7 /* KKCrashHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 55696833258B877900B52BA7 /* KKCrashHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55696836258B877900B52BA7 /* KKCrashHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 55696834258B877900B52BA7 /* KKCrashHandler.m */; };
 /* End PBXBuildFile section */
 
@@ -256,8 +256,8 @@
 				5516DB17257E468600C0D268 /* KKLog.h in Headers */,
 				556967CE2589DEA700B52BA7 /* NSObject-internal.h in Headers */,
 				55696829258A0D6000B52BA7 /* KKDescribable.h in Headers */,
-				55696835258B877900B52BA7 /* KKCrashHandler.h in Headers */,
 				55239C0D2587897B00369A19 /* KKMacros.h in Headers */,
+				55696835258B877900B52BA7 /* KKCrashHandler.h in Headers */,
 				55239C1725878F3600369A19 /* KKAutoreleasePoolPage.h in Headers */,
 				5516DA972578E50F00C0D268 /* KKOOMTracker.h in Headers */,
 				5516DA7E2578E41600C0D268 /* KKMemoryMapping.h in Headers */,

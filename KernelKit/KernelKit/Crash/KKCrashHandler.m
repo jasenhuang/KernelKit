@@ -7,6 +7,3 @@
 
 #import "KKCrashHandler.h"
 
-@implementation KKCrashHandler
-
-@end

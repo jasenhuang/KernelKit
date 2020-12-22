@@ -6,8 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-NS_ASSUME_NONNULL_BEGIN
+#import <KernelKit/KKMacros.h>
 
 /**
  * greate implement from KSCrash
@@ -15,31 +14,29 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 
+KK_EXTERN_C_BEGIN
+
 typedef int kk_signal;
 typedef void(^kk_signal_callback)(kk_signal);
-
-@interface KKSignalHandler : NSObject
 
 /**
  * register callback for signal
  */
-+ (void)kk_register_signal:(kk_signal)signal callback:(kk_signal_callback)callback;
+void kk_register_signal(kk_signal signal, kk_signal_callback callback);
 
 /**
  * unregister callback for signal
  */
-+ (void)kk_unregister_signal:(kk_signal)signal callback:(kk_signal_callback)callback;
+void kk_unregister_signal(kk_signal signal, kk_signal_callback callback);
 
 /**
  * register callback for common fatal signals
  */
-+ (void)kk_register_signals_callback:(kk_signal_callback)callback;
+void kk_register_signals_callback(kk_signal_callback callback);
 
 /**
  * unregister callback for common fatal signals
  */
-+ (void)kk_unregister_signals_callback:(kk_signal_callback)callback;
+void kk_unregister_signals_callback(kk_signal_callback callback);
 
-@end
-
-NS_ASSUME_NONNULL_END
+KK_EXTERN_C_END

@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <KernelKit/KKDescribable.h>
+#import <KernelKit/KKMacros.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,6 +18,21 @@ typedef NS_ENUM(NSUInteger, KKThreadRunState) {
     KKThreadStateUnInterruptible    = 4,        /* thread is in an uninterruptible wait */
     KKThreadStateHalted             = 5,        /* thread is halted at a clean point */
 };
+
+@class KKThread, KKThreadInfo;
+
+KK_EXTERN_C_BEGIN
+/**
+ * get current thread
+ */
+KKThread* kk_thread_self();
+/**
+ * get all threads
+ */
+NSArray<KKThread*>* kk_all_threads();
+
+KK_EXTERN_C_END
+
 
 @interface KKThreadInfo : KKDescribable
 @property(nonatomic) NSString* name;
@@ -29,13 +45,8 @@ typedef NS_ENUM(NSUInteger, KKThreadRunState) {
 @end
 
 @interface KKThread : KKDescribable
-@property(nonatomic) NSString* name;
+@property(nonatomic, readonly) NSString* name;
 @property(nonatomic, readonly) pthread_t thread;
-
-/**
- * get all threads
- */
-+ (NSArray<KKThread*>*)kk_all_threads;
 
 /**
  * thread detail infos
@@ -45,12 +56,17 @@ typedef NS_ENUM(NSUInteger, KKThreadRunState) {
 /**
  * suspend thread
  */
-- (void)suspend;
+- (BOOL)suspend;
 
 /**
  * resume thread
  */
-- (void)resume;
+- (BOOL)resume;
+
+/**
+ * terminate thread
+ */
+- (BOOL)terminate;
 
 @end
 

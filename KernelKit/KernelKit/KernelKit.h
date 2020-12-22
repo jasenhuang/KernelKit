@@ -15,6 +15,7 @@ FOUNDATION_EXPORT const unsigned char KernelKitVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <KernelKit/PublicHeader.h>
 
+#import <KernelKit/KKMacros.h>
 #import <KernelKit/KKDescribable.h>
 #import <KernelKit/KKThread.h>
 #import <KernelKit/KKOOMTracker.h>

@@ -24,35 +24,23 @@ inline NSTimeInterval kk_time_value(time_value time) {
     return time.seconds + (double)time.microseconds / 1000000;
 }
 
-@implementation KKThreadInfo
-
-@end
-
 @interface KKThread()
-@property(nonatomic, readwrite) mach_port_t port;
+@property(nonatomic, readwrite) unsigned int port;
+- (instancetype)initWithPort:(unsigned int)port;
 @end
 
-@implementation KKThread
-
-- (NSString*)name {
-    char name[256]; /* thread name buffer */
-    memset(name, 0, sizeof(name));
-    pthread_getname_np(self.thread, name, sizeof(name));
-    return [NSString stringWithUTF8String:name];
-}
-
-- (void)setName:(NSString *)name {
-    pthread_setname_np(name);
-}
-
-- (pthread_t)thread {
-    return pthread_from_mach_thread_np(self.port);
+/**
+ * get current thread
+ */
+KKThread* kk_thread_self() {
+    KKThread* thread = [[KKThread alloc] initWithPort:mach_thread_self()];
+    return thread;
 }
 
 /**
  * get all threads
  */
-+ (NSArray<KKThread*>*)kk_all_threads {
+NSArray<KKThread*>* kk_all_threads() {
     kern_return_t kr = KERN_SUCCESS;
     NSMutableArray<KKThread*>* kkThreads = [NSMutableArray array];
     
@@ -71,6 +59,33 @@ inline NSTimeInterval kk_time_value(time_value time) {
     vm_deallocate(mach_thread_self(), (vm_offset_t)threads, thread_count * sizeof(thread_act_array_t));
     
     return kkThreads;
+}
+
+@implementation KKThreadInfo
+
+@end
+
+@implementation KKThread
+
+- (instancetype)initWithPort:(unsigned int)port
+{
+    if (self = [self init]) {
+        _port = port;
+    }
+    return self;
+}
+/**
+ * properties
+ */
+- (NSString*)name {
+    char name[256]; /* thread name buffer */
+    memset(name, 0, sizeof(name));
+    pthread_getname_np(self.thread, name, sizeof(name));
+    return [NSString stringWithUTF8String:name];
+}
+
+- (pthread_t)thread {
+    return pthread_from_mach_thread_np(self.port);
 }
 
 /**
@@ -101,14 +116,25 @@ inline NSTimeInterval kk_time_value(time_value time) {
 /**
  * suspend thread
  */
-- (void)suspend {
-    
+- (BOOL)suspend {
+    return (KERN_SUCCESS ==
+            thread_suspend(self.port));
 }
 
 /**
  * resume thread
  */
-- (void)resume {
-    
+- (BOOL)resume {
+    return (KERN_SUCCESS ==
+            thread_resume(self.port));
 }
+
+/**
+ * terminate thread
+ */
+- (BOOL)terminate {
+    return (KERN_SUCCESS ==
+            thread_terminate(self.port));
+}
+
 @end

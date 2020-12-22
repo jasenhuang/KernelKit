@@ -56,50 +56,8 @@ static void handleSignal(int sigNum, siginfo_t* signalInfo, void* userContext) {
     //raise(sigNum);
 }
 
-@implementation KKSignalHandler
-/**
- * register callback for signal
- */
-+ (void)kk_register_signal:(kk_signal)signal callback:(kk_signal_callback)callback {
-    if (!_kk_previousSignalHandlers) [KKSignalHandler installSignalHandler];
-    NSMutableArray* blocks = _kk_signal_callbacks[@(signal)];
-    if (!blocks) {
-        blocks = @[].mutableCopy;
-        _kk_signal_callbacks[@(signal)] = blocks;
-    }
-    [blocks addObject:callback];
-}
-
-/**
- * unregister callback for signal
- */
-+ (void)kk_unregister_signal:(kk_signal)signal callback:(kk_signal_callback)callback {
-    NSMutableArray* blocks = _kk_signal_callbacks[@(signal)];
-    [blocks removeObject:callback];
-}
-
-/**
- * register callback for common fatal signals
- */
-+ (void)kk_register_signals_callback:(kk_signal_callback)callback {
-    if (!_kk_previousSignalHandlers) [KKSignalHandler installSignalHandler];
-    
-    for (int i = 0 ; i < _kk_fatalSignalsCount; ++i){
-        [self kk_register_signal:_kk_fatalSignals[i] callback:callback];
-    }
-}
-
-/**
- * unregister callback for common fatal signals
- */
-+ (void)kk_unregister_signals_callback:(kk_signal_callback)callback {
-    for (int i = 0 ; i < _kk_fatalSignalsCount; ++i){
-        [self kk_unregister_signal:_kk_fatalSignals[i] callback:callback];
-    }
-}
-
 #pragma signal handler interception
-+ (void)installSignalHandler {
+void installSignalHandler() {
     if (_kk_previousSignalHandlers) return ;
     NSLog(@"Installing signal handler.");
     
@@ -122,7 +80,7 @@ static void handleSignal(int sigNum, siginfo_t* signalInfo, void* userContext) {
     }
 }
 
-+ (void)uninstallSignalHandler {
+void uninstallSignalHandler() {
     NSLog(@"Uninstalling signal handlers.");
     
     for (int i = 0 ; i < _kk_fatalSignalsCount; ++i){
@@ -135,4 +93,43 @@ static void handleSignal(int sigNum, siginfo_t* signalInfo, void* userContext) {
     _kk_previousSignalHandlers = NULL;
 }
 
-@end
+/**
+ * register callback for signal
+ */
+void kk_register_signal(kk_signal signal, kk_signal_callback callback) {
+    if (!_kk_previousSignalHandlers) installSignalHandler();
+    NSMutableArray* blocks = _kk_signal_callbacks[@(signal)];
+    if (!blocks) {
+        blocks = @[].mutableCopy;
+        _kk_signal_callbacks[@(signal)] = blocks;
+    }
+    [blocks addObject:callback];
+}
+
+/**
+ * unregister callback for signal
+ */
+void kk_unregister_signal(kk_signal signal, kk_signal_callback callback) {
+    NSMutableArray* blocks = _kk_signal_callbacks[@(signal)];
+    [blocks removeObject:callback];
+}
+
+/**
+ * register callback for common fatal signals
+ */
+void kk_register_signals_callback(kk_signal_callback callback) {
+    if (!_kk_previousSignalHandlers) installSignalHandler();
+    
+    for (int i = 0 ; i < _kk_fatalSignalsCount; ++i){
+        kk_register_signal(_kk_fatalSignals[i], callback);
+    }
+}
+
+/**
+ * unregister callback for common fatal signals
+ */
+void kk_unregister_signals_callback(kk_signal_callback callback) {
+    for (int i = 0 ; i < _kk_fatalSignalsCount; ++i){
+        kk_unregister_signal(_kk_fatalSignals[i], callback);
+    }
+}

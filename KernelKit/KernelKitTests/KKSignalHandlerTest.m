@@ -25,9 +25,9 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
-    [KKSignalHandler kk_register_signals_callback:^(kk_signal signal) {
+    kk_register_signals_callback(^(kk_signal signal) {
         NSLog(@"crash happened");
-    }];
+    });
 }
 
 - (void)testPerformanceExample {

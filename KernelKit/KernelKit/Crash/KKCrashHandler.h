@@ -6,11 +6,5 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <KernelKit/KKMacros.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface KKCrashHandler : NSObject
-
-@end
-
-NS_ASSUME_NONNULL_END
