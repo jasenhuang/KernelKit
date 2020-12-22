@@ -61,6 +61,30 @@ NSArray<KKThread*>* kk_all_threads() {
     return kkThreads;
 }
 
+/**
+ * suspend all threads
+ */
+NSArray<KKThread*>* kk_suspend_all_threads() {
+    KKThread* currentThread = kk_thread_self();
+    NSArray<KKThread*>* threads = kk_all_threads();
+    for (KKThread* thread in threads) {
+        if (currentThread == thread) continue;
+        [thread suspend];
+    }
+    return threads;
+}
+
+/**
+ * resume all threads
+ */
+NSArray<KKThread*>* kk_resume_all_threads() {
+    NSArray<KKThread*>* threads = kk_all_threads();
+    for (KKThread* thread in threads) {
+        [thread resume];
+    }
+    return threads;
+}
+
 @implementation KKThreadInfo
 
 @end
@@ -135,6 +159,22 @@ NSArray<KKThread*>* kk_all_threads() {
 - (BOOL)terminate {
     return (KERN_SUCCESS ==
             thread_terminate(self.port));
+}
+
+- (BOOL)isEqual:(KKThread*)other
+{
+    if (other == self) {
+        return YES;
+    } else if (![super isEqual:other]) {
+        return NO;
+    } else {
+        return self.port == other.port;
+    }
+}
+
+- (NSUInteger)hash
+{
+    return self.port;
 }
 
 @end

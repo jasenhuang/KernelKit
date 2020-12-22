@@ -31,6 +31,16 @@ KKThread* kk_thread_self();
  */
 NSArray<KKThread*>* kk_all_threads();
 
+/**
+ * suspend all threads
+ */
+NSArray<KKThread*>* kk_suspend_all_threads();
+
+/**
+ * resume all threads
+ */
+NSArray<KKThread*>* kk_resume_all_threads();
+
 KK_EXTERN_C_END
 
 
