@@ -38,8 +38,10 @@
 		55696829258A0D6000B52BA7 /* KKDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 55696827258A0D6000B52BA7 /* KKDescribable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5569682A258A0D6000B52BA7 /* KKDescribable.m in Sources */ = {isa = PBXBuildFile; fileRef = 55696828258A0D6000B52BA7 /* KKDescribable.m */; };
 		55696830258A3F7500B52BA7 /* KKSignalHandlerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5569682F258A3F7500B52BA7 /* KKSignalHandlerTest.m */; };
-		55696835258B877900B52BA7 /* KKUncaughtExceptionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 55696833258B877900B52BA7 /* KKUncaughtExceptionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		55696836258B877900B52BA7 /* KKUncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 55696834258B877900B52BA7 /* KKUncaughtExceptionHandler.m */; };
+		55696835258B877900B52BA7 /* KKExceptionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 55696833258B877900B52BA7 /* KKExceptionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55696836258B877900B52BA7 /* KKExceptionHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55696834258B877900B52BA7 /* KKExceptionHandler.mm */; };
+		556969722593483900B52BA7 /* KKTerminationHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 556969702593483900B52BA7 /* KKTerminationHandler.h */; };
+		556969732593483900B52BA7 /* KKTerminationHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 556969712593483900B52BA7 /* KKTerminationHandler.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,8 +89,10 @@
 		55696827258A0D6000B52BA7 /* KKDescribable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKDescribable.h; sourceTree = "<group>"; };
 		55696828258A0D6000B52BA7 /* KKDescribable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKDescribable.m; sourceTree = "<group>"; };
 		5569682F258A3F7500B52BA7 /* KKSignalHandlerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKSignalHandlerTest.m; sourceTree = "<group>"; };
-		55696833258B877900B52BA7 /* KKUncaughtExceptionHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKUncaughtExceptionHandler.h; sourceTree = "<group>"; };
-		55696834258B877900B52BA7 /* KKUncaughtExceptionHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKUncaughtExceptionHandler.m; sourceTree = "<group>"; };
+		55696833258B877900B52BA7 /* KKExceptionHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKExceptionHandler.h; sourceTree = "<group>"; };
+		55696834258B877900B52BA7 /* KKExceptionHandler.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = KKExceptionHandler.mm; sourceTree = "<group>"; };
+		556969702593483900B52BA7 /* KKTerminationHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKTerminationHandler.h; sourceTree = "<group>"; };
+		556969712593483900B52BA7 /* KKTerminationHandler.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = KKTerminationHandler.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,8 +217,10 @@
 			children = (
 				5516DB08257E1B8300C0D268 /* KKSignalHandler.h */,
 				5516DB09257E1B8300C0D268 /* KKSignalHandler.mm */,
-				55696833258B877900B52BA7 /* KKUncaughtExceptionHandler.h */,
-				55696834258B877900B52BA7 /* KKUncaughtExceptionHandler.m */,
+				55696833258B877900B52BA7 /* KKExceptionHandler.h */,
+				55696834258B877900B52BA7 /* KKExceptionHandler.mm */,
+				556969702593483900B52BA7 /* KKTerminationHandler.h */,
+				556969712593483900B52BA7 /* KKTerminationHandler.mm */,
 			);
 			path = Crash;
 			sourceTree = "<group>";
@@ -254,10 +260,11 @@
 				5516DAC5257A2F9500C0D268 /* KKFishHook.h in Headers */,
 				5516DB0A257E1B8300C0D268 /* KKSignalHandler.h in Headers */,
 				5516DB17257E468600C0D268 /* KKLog.h in Headers */,
+				556969722593483900B52BA7 /* KKTerminationHandler.h in Headers */,
 				556967CE2589DEA700B52BA7 /* NSObject-internal.h in Headers */,
 				55696829258A0D6000B52BA7 /* KKDescribable.h in Headers */,
 				55239C0D2587897B00369A19 /* KKMacros.h in Headers */,
-				55696835258B877900B52BA7 /* KKUncaughtExceptionHandler.h in Headers */,
+				55696835258B877900B52BA7 /* KKExceptionHandler.h in Headers */,
 				55239C1725878F3600369A19 /* KKAutoreleasePoolPage.h in Headers */,
 				5516DA972578E50F00C0D268 /* KKOOMTracker.h in Headers */,
 				5516DA7E2578E41600C0D268 /* KKMemoryMapping.h in Headers */,
@@ -364,7 +371,8 @@
 				5569682A258A0D6000B52BA7 /* KKDescribable.m in Sources */,
 				5516DA982578E50F00C0D268 /* KKOOMTracker.m in Sources */,
 				5516DB18257E468600C0D268 /* KKLog.m in Sources */,
-				55696836258B877900B52BA7 /* KKUncaughtExceptionHandler.m in Sources */,
+				556969732593483900B52BA7 /* KKTerminationHandler.mm in Sources */,
+				55696836258B877900B52BA7 /* KKExceptionHandler.mm in Sources */,
 				5516DA792578E3D000C0D268 /* KKThread.mm in Sources */,
 				5516DB0B257E1B8300C0D268 /* KKSignalHandler.mm in Sources */,
 				55239C1825878F3600369A19 /* KKAutoreleasePoolPage.mm in Sources */,

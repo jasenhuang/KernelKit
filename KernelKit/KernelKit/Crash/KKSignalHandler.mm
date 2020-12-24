@@ -51,9 +51,9 @@ static void handleSignal(int sigNum, siginfo_t* signalInfo, void* userContext) {
         }
     }
     
-    //NSLog(@"Re-raising signal for regular handlers to catch.");
+    NSLog(@"Re-raising signal for regular handlers to catch.");
     // This is technically not allowed, but it works in OSX and iOS.
-    //raise(sigNum);
+    raise(sigNum);
 }
 
 #pragma signal handler interception
@@ -96,7 +96,7 @@ void uninstallSignalHandler() {
 /**
  * register callback for signal
  */
-void kk_register_signal(kk_signal signal, kk_signal_callback callback) {
+void kk_register_signal_callback(kk_signal signal, kk_signal_callback callback) {
     if (!_kk_previousSignalHandlers) installSignalHandler();
     NSMutableArray* blocks = _kk_signal_callbacks[@(signal)];
     if (!blocks) {
@@ -109,7 +109,7 @@ void kk_register_signal(kk_signal signal, kk_signal_callback callback) {
 /**
  * unregister callback for signal
  */
-void kk_unregister_signal(kk_signal signal, kk_signal_callback callback) {
+void kk_unregister_signal_callback(kk_signal signal, kk_signal_callback callback) {
     NSMutableArray* blocks = _kk_signal_callbacks[@(signal)];
     [blocks removeObject:callback];
 }
@@ -121,7 +121,7 @@ void kk_register_signals_callback(kk_signal_callback callback) {
     if (!_kk_previousSignalHandlers) installSignalHandler();
     
     for (int i = 0 ; i < _kk_fatalSignalsCount; ++i){
-        kk_register_signal(_kk_fatalSignals[i], callback);
+        kk_register_signal_callback(_kk_fatalSignals[i], callback);
     }
 }
 
@@ -130,6 +130,6 @@ void kk_register_signals_callback(kk_signal_callback callback) {
  */
 void kk_unregister_signals_callback(kk_signal_callback callback) {
     for (int i = 0 ; i < _kk_fatalSignalsCount; ++i){
-        kk_unregister_signal(_kk_fatalSignals[i], callback);
+        kk_unregister_signal_callback(_kk_fatalSignals[i], callback);
     }
 }
