@@ -6,11 +6,4 @@
 //
 
 #import <Foundation/Foundation.h>
-
-NS_ASSUME_NONNULL_BEGIN
-
-@interface KKAutoreleasePoolPage : NSObject
-
-@end
-
-NS_ASSUME_NONNULL_END
+#import <KernelKit/KKMacros.h>

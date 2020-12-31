@@ -22,4 +22,7 @@ FOUNDATION_EXPORT const unsigned char KernelKitVersionString[];
 #import <KernelKit/KKMemoryMapping.h>
 #import <KernelKit/KKDynamicLinker.h>
 #import <KernelKit/KKSignalHandler.h>
+#import <KernelKit/KKTerminationHandler.h>
 #import <KernelKit/KKAutoreleasePoolPage.h>
+#import <KernelKit/KKObject.h>
+#import <KernelKit/KKBlock.h>

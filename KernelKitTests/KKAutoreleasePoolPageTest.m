@@ -7,7 +7,7 @@
 
 #import <XCTest/XCTest.h>
 #import <KernelKit/KernelKit.h>
-#include <malloc/malloc.h>
+#import <malloc/malloc.h>
 
 @interface KKAutoreleaseTest : XCTestCase
 

@@ -7,19 +7,19 @@
 
 #import "KKMemoryMapping.h"
 #import "KKMacros.h"
-#include <sys/types.h>
-#include <sys/mman.h>
-#include <sys/stat.h>
-#include <err.h>
-#include <fcntl.h>
+#import <sys/types.h>
+#import <sys/mman.h>
+#import <sys/stat.h>
+#import <err.h>
+#import <fcntl.h>
 
 NSString* const KKMemoryMappingDomain = @"me.jasen.KenelKit.KKMemoryMapping";
 
-void _kk_mem_map_error(NSError** error, int code, id user_info) {
+void _kk_mem_map_error(NSError** error, int code, id msg) {
     if (error){
         *error = [NSError errorWithDomain:KKMemoryMappingDomain
                                      code:code
-                                 userInfo:user_info];
+                                 userInfo:@{NSLocalizedDescriptionKey: msg}];
     }
 }
 
@@ -137,13 +137,13 @@ KKMemoryMappingHandler* kk_mmap(NSURL* fileURL, NSDictionary* options, NSError**
 
 bool kk_mmap_handler(KKMemoryMappingHandler* handler, NSError** error) {
     if (!handler.fileURL.isFileURL || !handler.fileURL.path.length) {
-        _kk_mem_map_error(error, -1, @{@"msg":@"fileURL is empty"});
+        _kk_mem_map_error(error, -1, @"fileURL is empty");
         return NO;
     }
     /* 打开文件 */
     int fd = open(handler.fileURL.path.UTF8String, O_RDWR|O_CREAT, S_IREAD|S_IWRITE);
     if (fd < 0){
-        _kk_mem_map_error(error, errno, @{@"msg":@"open file error"});
+        _kk_mem_map_error(error, errno, @"open file error");
         return NO;
     }
     NSRange range = [handler.options[@"range"] rangeValue];
@@ -152,7 +152,7 @@ bool kk_mmap_handler(KKMemoryMappingHandler* handler, NSError** error) {
     /* 获取文件的属性 */
     struct stat fileStat;
     if (fstat(fd, &fileStat) < 0) {
-        _kk_mem_map_error(error, errno, @{@"msg":@"open stat error"});
+        _kk_mem_map_error(error, errno, @"open stat error");
         return NO;
     }
     size_t length = range.length ? : fileStat.st_size;
@@ -167,7 +167,7 @@ bool kk_mmap_handler(KKMemoryMappingHandler* handler, NSError** error) {
     /* 将文件映射至进程的地址空间 */
     void* pointer = mmap(NULL, length, prot, flags, fd, offset);
     if (!pointer || pointer == MAP_FAILED) {
-        _kk_mem_map_error(error, errno, @{@"msg":@"mmap error"});
+        _kk_mem_map_error(error, errno, @"mmap error");
         return NO;
     }
 
@@ -188,7 +188,7 @@ bool kk_msync_handler(KKMemoryMappingHandler* handler, NSError** error) {
     
     int code = msync(handler.pointer, handler.fileRange.length, MS_ASYNC);
     if (code) {
-        _kk_mem_map_error(error, errno, @{@"msg":@"mmap sync error"});
+        _kk_mem_map_error(error, errno, @"mmap sync error");
     }
     return !code;
 }
@@ -197,7 +197,7 @@ bool kk_munmap_handler(KKMemoryMappingHandler* handler, NSError** error) {
     if (!handler.pointer) return NO;
     int code = munmap(handler.pointer, handler.fileRange.length);
     if (code) {
-        _kk_mem_map_error(error, errno, @{@"msg":@"munmap error"});
+        _kk_mem_map_error(error, errno, @"munmap error");
     }
     handler.pointer = NULL;
 #if DEBUG

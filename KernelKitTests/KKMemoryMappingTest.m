@@ -27,15 +27,16 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
-    self.handler = [KKMemoryMapping kk_mmap:[NSURL fileURLWithPath:[self.docPath stringByAppendingPathComponent:@"file"]]
-                                          options:@{}
-                                            error:nil];
+    NSURL* fileURL = [NSURL fileURLWithPath:
+                      [self.docPath stringByAppendingPathComponent:@"file"]];
+    
+    self.handler = kk_mmap(fileURL, @{}, nil);
     [self.handler writeData:[@"hello world!" dataUsingEncoding:NSUTF8StringEncoding] offset:0];
     
     NSData* data = [self.handler readData:NSMakeRange(5, 5)];
     NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     
-    [KKMemoryMapping kk_munmap_handler:self.handler error:nil];
+    kk_munmap_handler(self.handler, nil);
 }
 
 - (void)testPerformanceExample {

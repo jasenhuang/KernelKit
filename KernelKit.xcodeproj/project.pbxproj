@@ -28,20 +28,27 @@
 		5516DB17257E468600C0D268 /* KKLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 5516DB15257E468600C0D268 /* KKLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5516DB18257E468600C0D268 /* KKLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 5516DB16257E468600C0D268 /* KKLog.m */; };
 		55239C0D2587897B00369A19 /* KKMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 55239C0B2587897B00369A19 /* KKMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		55239C1725878F3600369A19 /* KKAutoreleasePoolPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 55239C1525878F3600369A19 /* KKAutoreleasePoolPage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		55239C1825878F3600369A19 /* KKAutoreleasePoolPage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55239C1625878F3600369A19 /* KKAutoreleasePoolPage.mm */; };
 		55239C1E25879F4300369A19 /* KKThreadTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55239C1D25879F4300369A19 /* KKThreadTest.m */; };
-		556967CE2589DEA700B52BA7 /* NSObject-internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 556967CD2589DEA700B52BA7 /* NSObject-internal.h */; };
-		5569680A2589F5BD00B52BA7 /* NSObject-internal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 556968092589F5BD00B52BA7 /* NSObject-internal.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5539453E25949C1A00F04F83 /* KKFishHookTest.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5539453D25949C1900F04F83 /* KKFishHookTest.mm */; };
+		553945472598E60300F04F83 /* KKSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = 553945452598E60300F04F83 /* KKSwizzle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		553945482598E60300F04F83 /* KKSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 553945462598E60300F04F83 /* KKSwizzle.m */; };
+		55399049259DAB2A00E6143E /* KKBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 55399047259DAB2A00E6143E /* KKBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5539904A259DAB2A00E6143E /* KKBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 55399048259DAB2A00E6143E /* KKBlock.m */; };
+		55399051259DB13800E6143E /* KKAutoreleasePoolPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 5539904F259DB13700E6143E /* KKAutoreleasePoolPage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55399052259DB13800E6143E /* KKAutoreleasePoolPage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55399050259DB13800E6143E /* KKAutoreleasePoolPage.mm */; };
+		55399062259DC37F00E6143E /* KKObjCABITest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55399061259DC37F00E6143E /* KKObjCABITest.m */; };
+		556967CE2589DEA700B52BA7 /* KKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 556967CD2589DEA700B52BA7 /* KKObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5569680A2589F5BD00B52BA7 /* KKObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 556968092589F5BD00B52BA7 /* KKObject.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5569681E258A038200B52BA7 /* KKAutoreleasePoolPageTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5569681D258A038200B52BA7 /* KKAutoreleasePoolPageTest.m */; };
 		55696824258A084F00B52BA7 /* KKDynamicLinkerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55696823258A084F00B52BA7 /* KKDynamicLinkerTest.m */; };
 		55696829258A0D6000B52BA7 /* KKDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 55696827258A0D6000B52BA7 /* KKDescribable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5569682A258A0D6000B52BA7 /* KKDescribable.m in Sources */ = {isa = PBXBuildFile; fileRef = 55696828258A0D6000B52BA7 /* KKDescribable.m */; };
-		55696830258A3F7500B52BA7 /* KKSignalHandlerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5569682F258A3F7500B52BA7 /* KKSignalHandlerTest.m */; };
+		55696830258A3F7500B52BA7 /* KKCrashHandlerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5569682F258A3F7500B52BA7 /* KKCrashHandlerTest.m */; };
 		55696835258B877900B52BA7 /* KKExceptionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 55696833258B877900B52BA7 /* KKExceptionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55696836258B877900B52BA7 /* KKExceptionHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55696834258B877900B52BA7 /* KKExceptionHandler.mm */; };
-		556969722593483900B52BA7 /* KKTerminationHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 556969702593483900B52BA7 /* KKTerminationHandler.h */; };
+		556969722593483900B52BA7 /* KKTerminationHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 556969702593483900B52BA7 /* KKTerminationHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		556969732593483900B52BA7 /* KKTerminationHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 556969712593483900B52BA7 /* KKTerminationHandler.mm */; };
+		58B2713C231F460FEAC8771F /* libPods-KernelKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A825DF67B6FEF8D5F44B75 /* libPods-KernelKit.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +62,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2332332624F2BB29B2263375 /* Pods-KernelKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KernelKit.debug.xcconfig"; path = "Target Support Files/Pods-KernelKit/Pods-KernelKit.debug.xcconfig"; sourceTree = "<group>"; };
+		31D62AE0A34AAD6A17111788 /* Pods-KernelKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KernelKit.release.xcconfig"; path = "Target Support Files/Pods-KernelKit/Pods-KernelKit.release.xcconfig"; sourceTree = "<group>"; };
 		5516DA682578E34A00C0D268 /* KernelKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KernelKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5516DA6B2578E34A00C0D268 /* KernelKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KernelKit.h; sourceTree = "<group>"; };
 		5516DA6C2578E34A00C0D268 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -79,20 +88,27 @@
 		5516DB15257E468600C0D268 /* KKLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKLog.h; sourceTree = "<group>"; };
 		5516DB16257E468600C0D268 /* KKLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKLog.m; sourceTree = "<group>"; };
 		55239C0B2587897B00369A19 /* KKMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKMacros.h; sourceTree = "<group>"; };
-		55239C1525878F3600369A19 /* KKAutoreleasePoolPage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKAutoreleasePoolPage.h; sourceTree = "<group>"; };
-		55239C1625878F3600369A19 /* KKAutoreleasePoolPage.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = KKAutoreleasePoolPage.mm; sourceTree = "<group>"; };
 		55239C1D25879F4300369A19 /* KKThreadTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKThreadTest.m; sourceTree = "<group>"; };
-		556967CD2589DEA700B52BA7 /* NSObject-internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject-internal.h"; sourceTree = "<group>"; };
-		556968092589F5BD00B52BA7 /* NSObject-internal.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSObject-internal.mm"; sourceTree = "<group>"; };
+		5539453D25949C1900F04F83 /* KKFishHookTest.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = KKFishHookTest.mm; sourceTree = "<group>"; };
+		553945452598E60300F04F83 /* KKSwizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKSwizzle.h; sourceTree = "<group>"; };
+		553945462598E60300F04F83 /* KKSwizzle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKSwizzle.m; sourceTree = "<group>"; };
+		55399047259DAB2A00E6143E /* KKBlock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKBlock.h; sourceTree = "<group>"; };
+		55399048259DAB2A00E6143E /* KKBlock.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKBlock.m; sourceTree = "<group>"; };
+		5539904F259DB13700E6143E /* KKAutoreleasePoolPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKAutoreleasePoolPage.h; sourceTree = "<group>"; };
+		55399050259DB13800E6143E /* KKAutoreleasePoolPage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = KKAutoreleasePoolPage.mm; sourceTree = "<group>"; };
+		55399061259DC37F00E6143E /* KKObjCABITest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKObjCABITest.m; sourceTree = "<group>"; };
+		556967CD2589DEA700B52BA7 /* KKObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKObject.h; sourceTree = "<group>"; };
+		556968092589F5BD00B52BA7 /* KKObject.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = KKObject.mm; sourceTree = "<group>"; };
 		5569681D258A038200B52BA7 /* KKAutoreleasePoolPageTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKAutoreleasePoolPageTest.m; sourceTree = "<group>"; };
 		55696823258A084F00B52BA7 /* KKDynamicLinkerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKDynamicLinkerTest.m; sourceTree = "<group>"; };
 		55696827258A0D6000B52BA7 /* KKDescribable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKDescribable.h; sourceTree = "<group>"; };
 		55696828258A0D6000B52BA7 /* KKDescribable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKDescribable.m; sourceTree = "<group>"; };
-		5569682F258A3F7500B52BA7 /* KKSignalHandlerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKSignalHandlerTest.m; sourceTree = "<group>"; };
+		5569682F258A3F7500B52BA7 /* KKCrashHandlerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKCrashHandlerTest.m; sourceTree = "<group>"; };
 		55696833258B877900B52BA7 /* KKExceptionHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKExceptionHandler.h; sourceTree = "<group>"; };
 		55696834258B877900B52BA7 /* KKExceptionHandler.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = KKExceptionHandler.mm; sourceTree = "<group>"; };
 		556969702593483900B52BA7 /* KKTerminationHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKTerminationHandler.h; sourceTree = "<group>"; };
 		556969712593483900B52BA7 /* KKTerminationHandler.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = KKTerminationHandler.mm; sourceTree = "<group>"; };
+		E3A825DF67B6FEF8D5F44B75 /* libPods-KernelKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KernelKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58B2713C231F460FEAC8771F /* libPods-KernelKit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,12 +131,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20CB037973EE5173B8BC2FA9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2332332624F2BB29B2263375 /* Pods-KernelKit.debug.xcconfig */,
+				31D62AE0A34AAD6A17111788 /* Pods-KernelKit.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		5516DA5E2578E34A00C0D268 = {
 			isa = PBXGroup;
 			children = (
 				5516DA6A2578E34A00C0D268 /* KernelKit */,
 				5516DA862578E44C00C0D268 /* KernelKitTests */,
 				5516DA692578E34A00C0D268 /* Products */,
+				20CB037973EE5173B8BC2FA9 /* Pods */,
+				E3FA148BCEFE579AE74B7313 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -135,7 +164,7 @@
 		5516DA6A2578E34A00C0D268 /* KernelKit */ = {
 			isa = PBXGroup;
 			children = (
-				556967CC2589DEA700B52BA7 /* Private */,
+				556967CC2589DEA700B52BA7 /* ObjC */,
 				5516DB14257E466E00C0D268 /* Utils */,
 				5516DB07257E1B6800C0D268 /* Crash */,
 				5516DAC2257A2F5100C0D268 /* Hook */,
@@ -175,7 +204,9 @@
 				5516DABA257A2BC600C0D268 /* KKMemoryMappingTest.m */,
 				5569681D258A038200B52BA7 /* KKAutoreleasePoolPageTest.m */,
 				55696823258A084F00B52BA7 /* KKDynamicLinkerTest.m */,
-				5569682F258A3F7500B52BA7 /* KKSignalHandlerTest.m */,
+				5569682F258A3F7500B52BA7 /* KKCrashHandlerTest.m */,
+				5539453D25949C1900F04F83 /* KKFishHookTest.mm */,
+				55399061259DC37F00E6143E /* KKObjCABITest.m */,
 				5516DA892578E44C00C0D268 /* Info.plist */,
 			);
 			path = KernelKitTests;
@@ -186,8 +217,6 @@
 			children = (
 				5516DA952578E50F00C0D268 /* KKOOMTracker.h */,
 				5516DA962578E50F00C0D268 /* KKOOMTracker.m */,
-				55239C1525878F3600369A19 /* KKAutoreleasePoolPage.h */,
-				55239C1625878F3600369A19 /* KKAutoreleasePoolPage.mm */,
 			);
 			path = Memory;
 			sourceTree = "<group>";
@@ -204,6 +233,8 @@
 		5516DAC2257A2F5100C0D268 /* Hook */ = {
 			isa = PBXGroup;
 			children = (
+				553945452598E60300F04F83 /* KKSwizzle.h */,
+				553945462598E60300F04F83 /* KKSwizzle.m */,
 				5516DAC3257A2F9500C0D268 /* KKFishHook.h */,
 				5516DAC4257A2F9500C0D268 /* KKFishHook.mm */,
 				5516DAE0257A3E3400C0D268 /* fishhook.h */,
@@ -237,13 +268,25 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		556967CC2589DEA700B52BA7 /* Private */ = {
+		556967CC2589DEA700B52BA7 /* ObjC */ = {
 			isa = PBXGroup;
 			children = (
-				556967CD2589DEA700B52BA7 /* NSObject-internal.h */,
-				556968092589F5BD00B52BA7 /* NSObject-internal.mm */,
+				55399047259DAB2A00E6143E /* KKBlock.h */,
+				55399048259DAB2A00E6143E /* KKBlock.m */,
+				556967CD2589DEA700B52BA7 /* KKObject.h */,
+				556968092589F5BD00B52BA7 /* KKObject.mm */,
+				5539904F259DB13700E6143E /* KKAutoreleasePoolPage.h */,
+				55399050259DB13800E6143E /* KKAutoreleasePoolPage.mm */,
 			);
-			path = Private;
+			path = ObjC;
+			sourceTree = "<group>";
+		};
+		E3FA148BCEFE579AE74B7313 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E3A825DF67B6FEF8D5F44B75 /* libPods-KernelKit.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,12 +303,14 @@
 				5516DAC5257A2F9500C0D268 /* KKFishHook.h in Headers */,
 				5516DB0A257E1B8300C0D268 /* KKSignalHandler.h in Headers */,
 				5516DB17257E468600C0D268 /* KKLog.h in Headers */,
-				556969722593483900B52BA7 /* KKTerminationHandler.h in Headers */,
-				556967CE2589DEA700B52BA7 /* NSObject-internal.h in Headers */,
 				55696829258A0D6000B52BA7 /* KKDescribable.h in Headers */,
 				55239C0D2587897B00369A19 /* KKMacros.h in Headers */,
 				55696835258B877900B52BA7 /* KKExceptionHandler.h in Headers */,
-				55239C1725878F3600369A19 /* KKAutoreleasePoolPage.h in Headers */,
+				556969722593483900B52BA7 /* KKTerminationHandler.h in Headers */,
+				55399049259DAB2A00E6143E /* KKBlock.h in Headers */,
+				55399051259DB13800E6143E /* KKAutoreleasePoolPage.h in Headers */,
+				553945472598E60300F04F83 /* KKSwizzle.h in Headers */,
+				556967CE2589DEA700B52BA7 /* KKObject.h in Headers */,
 				5516DA972578E50F00C0D268 /* KKOOMTracker.h in Headers */,
 				5516DA7E2578E41600C0D268 /* KKMemoryMapping.h in Headers */,
 			);
@@ -278,6 +323,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5516DA702578E34A00C0D268 /* Build configuration list for PBXNativeTarget "KernelKit" */;
 			buildPhases = (
+				F36CD56E577C6818AC1783F5 /* [CP] Check Pods Manifest.lock */,
 				5516DA632578E34A00C0D268 /* Headers */,
 				5516DA642578E34A00C0D268 /* Sources */,
 				5516DA652578E34A00C0D268 /* Frameworks */,
@@ -362,6 +408,31 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		F36CD56E577C6818AC1783F5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KernelKit-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5516DA642578E34A00C0D268 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -372,13 +443,15 @@
 				5516DA982578E50F00C0D268 /* KKOOMTracker.m in Sources */,
 				5516DB18257E468600C0D268 /* KKLog.m in Sources */,
 				556969732593483900B52BA7 /* KKTerminationHandler.mm in Sources */,
+				55399052259DB13800E6143E /* KKAutoreleasePoolPage.mm in Sources */,
 				55696836258B877900B52BA7 /* KKExceptionHandler.mm in Sources */,
 				5516DA792578E3D000C0D268 /* KKThread.mm in Sources */,
 				5516DB0B257E1B8300C0D268 /* KKSignalHandler.mm in Sources */,
-				55239C1825878F3600369A19 /* KKAutoreleasePoolPage.mm in Sources */,
 				5516DA7F2578E41600C0D268 /* KKMemoryMapping.m in Sources */,
+				553945482598E60300F04F83 /* KKSwizzle.m in Sources */,
 				5516DAE3257A3E3400C0D268 /* fishhook.c in Sources */,
-				5569680A2589F5BD00B52BA7 /* NSObject-internal.mm in Sources */,
+				5539904A259DAB2A00E6143E /* KKBlock.m in Sources */,
+				5569680A2589F5BD00B52BA7 /* KKObject.mm in Sources */,
 				5516DAC6257A2F9500C0D268 /* KKFishHook.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -387,11 +460,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55696830258A3F7500B52BA7 /* KKSignalHandlerTest.m in Sources */,
+				55696830258A3F7500B52BA7 /* KKCrashHandlerTest.m in Sources */,
 				5516DA882578E44C00C0D268 /* KernelKitTests.m in Sources */,
+				55399062259DC37F00E6143E /* KKObjCABITest.m in Sources */,
 				5569681E258A038200B52BA7 /* KKAutoreleasePoolPageTest.m in Sources */,
 				5516DABB257A2BC600C0D268 /* KKMemoryMappingTest.m in Sources */,
 				55696824258A084F00B52BA7 /* KKDynamicLinkerTest.m in Sources */,
+				5539453E25949C1A00F04F83 /* KKFishHookTest.mm in Sources */,
 				55239C1E25879F4300369A19 /* KKThreadTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -527,6 +602,7 @@
 		};
 		5516DA712578E34A00C0D268 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2332332624F2BB29B2263375 /* Pods-KernelKit.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -549,6 +625,7 @@
 		};
 		5516DA722578E34A00C0D268 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 31D62AE0A34AAD6A17111788 /* Pods-KernelKit.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;

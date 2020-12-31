@@ -51,6 +51,9 @@ static void handleSignal(int sigNum, siginfo_t* signalInfo, void* userContext) {
         }
     }
     
+    /* disable all crash handlers and re-raise signal */
+    
+    
     NSLog(@"Re-raising signal for regular handlers to catch.");
     // This is technically not allowed, but it works in OSX and iOS.
     raise(sigNum);
@@ -74,7 +77,7 @@ void installSignalHandler() {
     
     for (int i = 0 ; i < _kk_fatalSignalsCount; ++i){
         if (0 != sigaction(_kk_fatalSignals[i], &action, &_kk_previousSignalHandlers[i])) {
-            NSLog(@"install sigaction (%d): %s", _kk_fatalSignals[i], strerror(errno));
+            NSLog(@"Failed to install sigaction (%d): %s", _kk_fatalSignals[i], strerror(errno));
             break;
         }
     }

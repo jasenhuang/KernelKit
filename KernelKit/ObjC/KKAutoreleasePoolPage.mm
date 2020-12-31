@@ -6,9 +6,4 @@
 //
 
 #import "KKAutoreleasePoolPage.h"
-#import "KKMacros.h"
-#import "NSObject-internal.h"
-
-@implementation KKAutoreleasePoolPage
-
-@end
+#import "KKObject.h"

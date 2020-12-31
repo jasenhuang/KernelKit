@@ -5,11 +5,11 @@
 //  Created by jasenhuang on 2020/12/16.
 //
 
-#include "NSObject-internal.h"
-#include "KKMacros.h"
-#include <malloc/malloc.h>
-#include <stdint.h>
-#include <stdbool.h>
+#import <KernelKit/KKMacros.h>
+#import "KKObject.h"
+#import <malloc/malloc.h>
+#import <stdint.h>
+#import <stdbool.h>
 
 typedef pthread_key_t tls_key_t;
 

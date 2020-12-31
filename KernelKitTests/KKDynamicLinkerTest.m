@@ -25,7 +25,7 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
-    NSLog(@"%@", [KKDynamicLinker kk_get_loaded_mach_images]);
+    NSLog(@"%@", kk_get_loaded_mach_images());
     kk_register_image_add_callback(^(const struct mach_header * _Nonnull header, intptr_t slide) {
         //NSLog(@"%p", header);
     });
