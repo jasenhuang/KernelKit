@@ -162,28 +162,7 @@ static void _kk_ffi_closure_func(ffi_cif *cif, void *ret, void **args, void *use
 
 #define PTR(type) COND(type, pointer)
 
-static ffi_type *_kk_ffi_struct_type(const char *str) {
-//    NSUInteger size, align;
-//    long length;
-//    BHSizeAndAlignment(str, &size, &align, &length);
-//    ffi_type *structType = [self _allocate:sizeof(*structType)];
-//    structType->type = FFI_TYPE_STRUCT;
-//
-//    const char *temp = [[[NSString stringWithUTF8String:str] substringWithRange:NSMakeRange(0, length)] UTF8String];
-//
-//    // cut "struct="
-//    while (temp && *temp && *temp != '=') {
-//        temp++;
-//    }
-//    int elementCount = 0;
-//    ffi_type **elements = [self _typesWithEncodeString:temp + 1 getCount:&elementCount startIndex:0 nullAtEnd:YES];
-//    if (!elements) {
-//        return nil;
-//    }
-//    structType->elements = elements;
-//    return structType;
-    return nil;
-}
+static ffi_type *_kk_ffi_struct_type(const char *str);
 
 static ffi_type *_kk_ffi_type(const char *str) {
     SINT(_Bool);
@@ -225,4 +204,62 @@ static ffi_type *_kk_ffi_type(const char *str) {
     
     NSLog(@"Unknown encode string %s", str);
     return NULL;
+}
+
+static const char *_kk_size_alignment(const char *str, NSUInteger *sizep, NSUInteger *alignp, long *lenp) {
+    const char *out = NSGetSizeAndAlignment(str, sizep, alignp);
+    if (lenp) {
+        *lenp = out - str;
+    }
+    while(*out == '}') {
+        out++;
+    }
+    while(isdigit(*out)) {
+        out++;
+    }
+    return out;
+}
+
+static int _kk_ffi_type_count(const char *str) {
+    int count = 0;
+    while(str && *str) {
+        str = _kk_size_alignment(str, NULL, NULL, NULL);
+        count++;
+    }
+    return count;
+}
+
+static ffi_type **_kk_ffi_types(const char* str, int index, int* count) {
+    *count = _kk_ffi_type_count(str) - index;
+    ffi_type **argTypes = (ffi_type **)calloc(*count, sizeof(ffi_type));
+    
+    while (str && *str) {
+        ffi_type *argType = _kk_ffi_type(str);
+        const char *next = _kk_size_alignment(str, NULL, NULL, NULL);
+    }
+    return argTypes;
+}
+
+static ffi_type *_kk_ffi_struct_type(const char *str) {
+    NSUInteger size, align;
+    long length;
+    _kk_size_alignment(str, &size, &align, &length);
+    ffi_type *structType = (ffi_type *)calloc(1, sizeof(ffi_type));
+    structType->type = FFI_TYPE_STRUCT;
+    
+    char buf[length]; memset(buf, 0, sizeof(buf));
+    stpncpy(buf, str, length);
+    char* temp = &buf[0];
+    // cut "struct="
+    while (*temp && *temp != '=') {
+        temp++;
+    }
+//    int elementCount = 0;
+//    ffi_type **elements = [self _typesWithEncodeString:temp + 1 getCount:&elementCount startIndex:0 nullAtEnd:YES];
+//    if (!elements) {
+//        return nil;
+//    }
+//    structType->elements = elements;
+//    return structType;
+    return nil;
 }

@@ -1,6 +1,6 @@
 # KernelKit
-
-封装 iOS/Macosx 常用的底层API，涉及动态库，线程，内存，Crash, Hook, I/O, ObjC-ABI等内容
+KernelKit封装了 iOS/Macosx 常用的底层API，涉及动态库，线程，内存，Crash, Hook, I/O, ObjC-ABI等内容
+致力于为iOS/Macosx底层接口提供更好的API封装
 持续更新 ...
 
 ## Features
