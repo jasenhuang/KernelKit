@@ -7,16 +7,16 @@
 
 #import "KKFishHook.h"
 #import "fishhook.h"
+#import "ffi.h"
 #import <objc/runtime.h>
 #import <KernelKit/KKBlock.h>
-#import <libffi-iOS/ffi.h>
 
 int testFunc(char* a, int b) {
     return b + 1;
 }
 
-int testFunc1(char* a, CGRect b) {
-    return b.origin.x + 1;
+int testFunc1(char* a, test_t b) {
+    return b.x + 1;
 }
 
 @interface KKContext()
@@ -163,25 +163,26 @@ static void _kk_ffi_closure_func(ffi_cif *cif, void *ret, void **args, void *use
 #define PTR(type) COND(type, pointer)
 
 static ffi_type *_kk_ffi_struct_type(const char *str) {
-    NSUInteger size, align;
-    long length;
-    BHSizeAndAlignment(str, &size, &align, &length);
-    ffi_type *structType = [self _allocate:sizeof(*structType)];
-    structType->type = FFI_TYPE_STRUCT;
-    
-    const char *temp = [[[NSString stringWithUTF8String:str] substringWithRange:NSMakeRange(0, length)] UTF8String];
-    
-    // cut "struct="
-    while (temp && *temp && *temp != '=') {
-        temp++;
-    }
-    int elementCount = 0;
-    ffi_type **elements = [self _typesWithEncodeString:temp + 1 getCount:&elementCount startIndex:0 nullAtEnd:YES];
-    if (!elements) {
-        return nil;
-    }
-    structType->elements = elements;
-    return structType;
+//    NSUInteger size, align;
+//    long length;
+//    BHSizeAndAlignment(str, &size, &align, &length);
+//    ffi_type *structType = [self _allocate:sizeof(*structType)];
+//    structType->type = FFI_TYPE_STRUCT;
+//
+//    const char *temp = [[[NSString stringWithUTF8String:str] substringWithRange:NSMakeRange(0, length)] UTF8String];
+//
+//    // cut "struct="
+//    while (temp && *temp && *temp != '=') {
+//        temp++;
+//    }
+//    int elementCount = 0;
+//    ffi_type **elements = [self _typesWithEncodeString:temp + 1 getCount:&elementCount startIndex:0 nullAtEnd:YES];
+//    if (!elements) {
+//        return nil;
+//    }
+//    structType->elements = elements;
+//    return structType;
+    return nil;
 }
 
 static ffi_type *_kk_ffi_type(const char *str) {

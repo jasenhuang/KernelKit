@@ -28,7 +28,12 @@ typedef void*(^kk_replacement_function)(KKContext*);
  */
 void kk_fish_hook(NSString* func, kk_replacement_function block);
 
+struct test_t {
+    int x;
+    int y;
+};
+
 int testFunc(char* a, int b);
-int testFunc1(char* a, CGRect b);
+int testFunc1(char* a, struct test_t b);
 
 KK_EXTERN_C_END

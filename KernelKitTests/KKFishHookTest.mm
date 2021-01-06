@@ -33,12 +33,14 @@
 //    });
 //    testFunc("jasen", 2);
     
-    kk_fish_hook(@"testFunc1", (kk_replacement_function)^int(KKContext *context, char* name, CGRect rect) {
-        int(*origin)(char*,CGRect) = (int(*)(char*,CGRect))context.replaced_function;
+    kk_fish_hook(@"testFunc1", (kk_replacement_function)^int(KKContext *context, char* name, struct test_t rect) {
+        int(*origin)(char*,struct test_t) = (int(*)(char*,struct test_t))context.replaced_function;
         int sum = origin(name, rect);
         return sum;
     });
-    testFunc1("jasen", CGRectMake(100, 0, 0, 0));
+    test_t t;
+    t.x = 100;
+    testFunc1("jasen", t);
     
 //    kk_fish_hook(@"printf", (kk_replacement_function)^(const char * format, ...){
 //        NSLog(@"");
