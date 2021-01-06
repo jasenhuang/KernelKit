@@ -14,7 +14,7 @@ static NSMutableArray* _kk_exception_callbacks = @[].mutableCopy;
 static void handleException(NSException* exception) {
     NSLog(@"Trapped exception %@", exception);
     /* handle exception */
-    
+    /* disable all crash handlers and re-raise signal */
     /* call previsous handler */
     _kk_previousExceptionHandler(exception);
 }

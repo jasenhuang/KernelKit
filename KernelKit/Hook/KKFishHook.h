@@ -10,19 +10,25 @@
 
 KK_EXTERN_C_BEGIN
 
-typedef void*(*kk_replaced_function)(...);
-
-typedef void*(^kk_replacement_function)(kk_replaced_function, ...);
-
-#define _kk_replaced_function(func, ...) func(__VA_ARGS__);
-
-#define _kk_replacement_function(...) void*(^)(kk_replaced_function, __VA_ARGS__);
-
+@interface KKContext : NSObject
+@property(nonatomic, copy, readonly) id replacement_function;
+@property(nonatomic, readonly) void* replaced_function;
+@property(nonatomic, readonly) NSMethodSignature* signature;
+@end
 
 /**
- * fish hook function
+ * replacement block
+ * need to complete arguments
+ *
+ */
+typedef void*(^kk_replacement_function)(KKContext*);
+
+/**
+ * fish hook function with block
  */
 void kk_fish_hook(NSString* func, kk_replacement_function block);
 
+int testFunc(char* a, int b);
+int testFunc1(char* a, CGRect b);
 
 KK_EXTERN_C_END

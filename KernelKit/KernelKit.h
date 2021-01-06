@@ -26,3 +26,5 @@ FOUNDATION_EXPORT const unsigned char KernelKitVersionString[];
 #import <KernelKit/KKAutoreleasePoolPage.h>
 #import <KernelKit/KKObject.h>
 #import <KernelKit/KKBlock.h>
+#import <KernelKit/KKSwizzle.h>
+#import <KernelKit/KKFishHook.h>

@@ -29,6 +29,8 @@ static void handleTermination() {
         
     }
     
+    /* disable all crash handlers and re-raise signal */
+    
     /* call previsous handler */
     _kk_previsouTerminationHandler();
 }
