@@ -11,13 +11,31 @@
 #import <objc/runtime.h>
 #import <KernelKit/KKBlock.h>
 
-int testFunc(char* a, int b) {
-    return b + 1;
+KK_EXTERN void ffi_types_free(ffi_type** types);
+
+/**
+ * free allocated ffi_type
+ */
+inline void ffi_type_free(ffi_type* type) {
+    if (!type || type->type != FFI_TYPE_STRUCT) return ;
+    ffi_types_free(type->elements);
+    free(type);
 }
 
-int testFunc1(char* a, test_t b) {
-    return b.x + 1;
+/**
+ * free allocated ffi_types with null end
+ */
+inline void ffi_types_free(ffi_type** types) {
+    if (!types) return ;
+    int index = 0;
+    ffi_type* type = NULL;
+    do {
+        type = *(types + index++);
+        ffi_type_free(type);
+    } while(type != NULL);
+    free(types);
 }
+
 
 @interface KKContext()
 @property(nonatomic, copy, readwrite) id replacement_function;
@@ -29,12 +47,38 @@ int testFunc1(char* a, test_t b) {
 
 @end
 
+@interface KKToken()
+@property(nonatomic, readwrite) ffi_cif *cif;
+@property(nonatomic, readwrite) NSUInteger argc;
+@property(nonatomic, readwrite) ffi_type **argTypes;
+@property(nonatomic, readwrite) ffi_type *retType;
+@property(nonatomic, readwrite) ffi_closure *closure;
+@property(nonatomic, readwrite) NSString* name;
+@property(nonatomic, readwrite) void* replaced;
+@end
+
+@implementation KKToken
+- (void)restore {
+    rebind_symbols((struct rebinding[1]){
+        _name.UTF8String, _replaced, NULL
+    }, 1);
+}
+
+- (void)dealloc
+{
+    free(_cif);_cif = NULL;
+    ffi_types_free(_argTypes);_argTypes = NULL;
+    ffi_type_free(_retType);_retType = NULL;
+    ffi_closure_free(_closure);_closure = NULL;
+}
+@end
+
 static ffi_type *_kk_ffi_type(const char *c);
 static void _kk_ffi_closure_func(ffi_cif *cif, void *ret, void **args, void *context);
 
 static NSMutableDictionary* _kk_fish_hook_blocks = @{}.mutableCopy;
-void kk_fish_hook(NSString* func, kk_replacement_function block) {
-    if (!func.length || !block) return;
+KKToken* kk_fish_hook(NSString* func, kk_replacement_function block) {
+    if (!func.length || !block) return nil;
     
     // __NSStackBlock__ -> __NSStackBlock -> NSBlock
     if ([block isKindOfClass:NSClassFromString(@"__NSStackBlock")]) {
@@ -50,13 +94,15 @@ void kk_fish_hook(NSString* func, kk_replacement_function block) {
     
     // 构造参数类型列表
     size_t argc = signature.numberOfArguments;
-    ffi_type **argTypes = (ffi_type **)calloc(argc, sizeof(ffi_type *));
+    ffi_type **argTypes = (ffi_type **)calloc(argc + 1, sizeof(ffi_type *));
     for (size_t i = 0; i < argc; ++i) {
         const char *argType = [signature getArgumentTypeAtIndex:i];
         ffi_type *arg_ffi_type = _kk_ffi_type(argType);
         NSCAssert(arg_ffi_type, @"can't find a ffi_type: %s", argType);
         argTypes[i] = arg_ffi_type;
     }
+    // null end
+    argTypes[argc] = NULL;
     
     // 返回值类型
     ffi_type *retType = _kk_ffi_type(signature.methodReturnType);
@@ -66,7 +112,7 @@ void kk_fish_hook(NSString* func, kk_replacement_function block) {
     ffi_status ret = ffi_prep_cif(cif, FFI_DEFAULT_ABI, (UInt32)argc, retType, argTypes);
     if (ret != FFI_OK) {
         NSCAssert(NO, @"ffi_prep_cif failed: %d", ret);
-        return;
+        return nil;
     }
     
     // 生成新的 Function
@@ -75,7 +121,7 @@ void kk_fish_hook(NSString* func, kk_replacement_function block) {
     ret = ffi_prep_closure_loc(closure, cif, _kk_ffi_closure_func, (__bridge_retained void *)context, _kk_closure_function);
     if (ret != FFI_OK) {
         NSCAssert(NO, @"ffi_prep_closure_loc failed: %d", ret);
-        return;
+        return nil;
     }
     
     void *(*replaced)(...) = nullptr;
@@ -86,6 +132,19 @@ void kk_fish_hook(NSString* func, kk_replacement_function block) {
     }, 1);
     
     context.replaced_function = (void*)replaced;
+    
+    // token 内存管理
+    KKToken* token = [[KKToken alloc] init];
+    token.cif = cif;
+    token.closure = closure;
+    token.argTypes = argTypes;
+    token.retType = retType;
+    token.argc = argc;
+    token.replaced = (void*)replaced;
+    token.name = func;
+    _kk_fish_hook_blocks[func] = token;
+    
+    return token;
 }
 
 static void _kk_ffi_closure_func(ffi_cif *cif, void *ret, void **args, void *userdata) {
@@ -104,7 +163,7 @@ static void _kk_ffi_closure_func(ffi_cif *cif, void *ret, void **args, void *use
     }
     
     [invocation setReturnValue:ret];
-    [invocation retainArguments];
+    //[invocation retainArguments];//TODO
     
     [invocation invokeWithTarget:context.replacement_function];
     //ffi_call(cif, (void(*)(void))block->invoke, ret, args);
@@ -229,14 +288,25 @@ static int _kk_ffi_type_count(const char *str) {
     return count;
 }
 
-static ffi_type **_kk_ffi_types(const char* str, int index, int* count) {
-    *count = _kk_ffi_type_count(str) - index;
-    ffi_type **argTypes = (ffi_type **)calloc(*count, sizeof(ffi_type));
+static ffi_type **_kk_ffi_types(const char* str, int* count) {
+    *count = _kk_ffi_type_count(str);
+    ffi_type **argTypes = (ffi_type **)calloc(*count + 1, sizeof(ffi_type));
     
-    while (str && *str) {
+    int i = 0;
+    while (str && *str && i < *count) {
         ffi_type *argType = _kk_ffi_type(str);
+        if (argType){
+            argTypes[i] = argType;
+        }else{
+            *count = -1;
+            return NULL;
+        }
         const char *next = _kk_size_alignment(str, NULL, NULL, NULL);
+        str = next;
+        ++i;
     }
+    
+    argTypes[*count] = NULL; // null end
     return argTypes;
 }
 
@@ -247,19 +317,17 @@ static ffi_type *_kk_ffi_struct_type(const char *str) {
     ffi_type *structType = (ffi_type *)calloc(1, sizeof(ffi_type));
     structType->type = FFI_TYPE_STRUCT;
     
-    char buf[length]; memset(buf, 0, sizeof(buf));
+    char buf[length + 1]; memset(buf, 0, sizeof(buf));
     stpncpy(buf, str, length);
     char* temp = &buf[0];
     // cut "struct="
     while (*temp && *temp != '=') {
         temp++;
     }
-//    int elementCount = 0;
-//    ffi_type **elements = [self _typesWithEncodeString:temp + 1 getCount:&elementCount startIndex:0 nullAtEnd:YES];
-//    if (!elements) {
-//        return nil;
-//    }
-//    structType->elements = elements;
-//    return structType;
-    return nil;
+    int count = 0;
+    ffi_type **elements = _kk_ffi_types(temp + 1, &count);
+    if (!elements)  return NULL;
+    
+    structType->elements = elements;
+    return structType;
 }

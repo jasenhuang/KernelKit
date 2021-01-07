@@ -17,7 +17,7 @@ void _kk_block_error(NSError** error, int code, id msg) {
     }
 }
 
-NSMethodSignature* kk_block_method_signature(id block, NSError** error) {
+const char* kk_block_type_encoding(id block, NSError** error) {
     Block_layout_ptr layout = (__bridge void*)block;
     if (!(layout->flags & BLOCK_HAS_SIGNATURE)){
         NSString *description =
@@ -39,5 +39,10 @@ NSMethodSignature* kk_block_method_signature(id block, NSError** error) {
         return nil;
     }
     const char *signature = (*(const char **)desc);
+    return signature;
+}
+
+NSMethodSignature* kk_block_method_signature(id block, NSError** error) {
+    const char *signature = kk_block_type_encoding(block, error);
     return [NSMethodSignature signatureWithObjCTypes:signature];
 }

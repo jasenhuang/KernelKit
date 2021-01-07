@@ -16,6 +16,12 @@ KK_EXTERN_C_BEGIN
 @property(nonatomic, readonly) NSMethodSignature* signature;
 @end
 
+@interface KKToken : NSObject
+- (void)restore;
+@end
+
+typedef char* KKType;
+
 /**
  * replacement block
  * need to complete arguments
@@ -26,14 +32,6 @@ typedef void*(^kk_replacement_function)(KKContext*);
 /**
  * fish hook function with block
  */
-void kk_fish_hook(NSString* func, kk_replacement_function block);
-
-struct test_t {
-    int x;
-    int y;
-};
-
-int testFunc(char* a, int b);
-int testFunc1(char* a, struct test_t b);
+KKToken* kk_fish_hook(NSString* func, kk_replacement_function block);
 
 KK_EXTERN_C_END

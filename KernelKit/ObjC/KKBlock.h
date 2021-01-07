@@ -66,8 +66,19 @@ typedef struct Block_layout* Block_layout_ptr;
 
 KK_EXTERN_C_BEGIN
 
+/**
+ * get block type encoding
+ */
+const char* kk_block_type_encoding(id block, NSError** error);
+
+/**
+ * get block signature
+ */
 NSMethodSignature* kk_block_method_signature(id block, NSError** error);
 
+/**
+ *
+ */
 BlockInvokeFunction kk_block_invoke_function(id block, NSError** error);
 
 BlockCopyFunction kk_block_copy_function(id block, NSError** error);

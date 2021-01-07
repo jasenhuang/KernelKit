@@ -68,6 +68,7 @@
 		55249B9F25A5B11400A8C16D /* sysv_armv7.S in Sources */ = {isa = PBXBuildFile; fileRef = 55249B7825A5B11300A8C16D /* sysv_armv7.S */; };
 		55249BA025A5B11400A8C16D /* internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 55249B7925A5B11300A8C16D /* internal.h */; };
 		55249BA125A5B11400A8C16D /* ffi_armv7.c in Sources */ = {isa = PBXBuildFile; fileRef = 55249B7A25A5B11300A8C16D /* ffi_armv7.c */; };
+		55249D4025A72A0600A8C16D /* KKFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55249D3D25A729F800A8C16D /* KKFramework.framework */; };
 		5539453E25949C1A00F04F83 /* KKFishHookTest.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5539453D25949C1900F04F83 /* KKFishHookTest.mm */; };
 		553945472598E60300F04F83 /* KKSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = 553945452598E60300F04F83 /* KKSwizzle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		553945482598E60300F04F83 /* KKSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 553945462598E60300F04F83 /* KKSwizzle.m */; };
@@ -96,6 +97,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 5516DA672578E34A00C0D268;
 			remoteInfo = KernelKit;
+		};
+		55249D3C25A729F800A8C16D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55249D3825A729F800A8C16D /* KKFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55249CFE25A7281100A8C16D;
+			remoteInfo = KKFramework;
+		};
+		55249D3E25A72A0300A8C16D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55249D3825A729F800A8C16D /* KKFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 55249CFD25A7281100A8C16D;
+			remoteInfo = KKFramework;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -164,6 +179,7 @@
 		55249B7825A5B11300A8C16D /* sysv_armv7.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = sysv_armv7.S; sourceTree = "<group>"; };
 		55249B7925A5B11300A8C16D /* internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = internal.h; sourceTree = "<group>"; };
 		55249B7A25A5B11300A8C16D /* ffi_armv7.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ffi_armv7.c; sourceTree = "<group>"; };
+		55249D3825A729F800A8C16D /* KKFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KKFramework.xcodeproj; path = KKFramework/KKFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		5539453D25949C1900F04F83 /* KKFishHookTest.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = KKFishHookTest.mm; sourceTree = "<group>"; };
 		553945452598E60300F04F83 /* KKSwizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKSwizzle.h; sourceTree = "<group>"; };
 		553945462598E60300F04F83 /* KKSwizzle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKSwizzle.m; sourceTree = "<group>"; };
@@ -197,6 +213,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55249D4025A72A0600A8C16D /* KKFramework.framework in Frameworks */,
 				5516DA8A2578E44C00C0D268 /* KernelKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,6 +279,7 @@
 		5516DA862578E44C00C0D268 /* KernelKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				55249D3825A729F800A8C16D /* KKFramework.xcodeproj */,
 				5516DA872578E44C00C0D268 /* KernelKitTests.m */,
 				55239C1D25879F4300369A19 /* KKThreadTest.m */,
 				5516DABA257A2BC600C0D268 /* KKMemoryMappingTest.m */,
@@ -417,6 +435,14 @@
 			path = arm;
 			sourceTree = "<group>";
 		};
+		55249D3925A729F800A8C16D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				55249D3D25A729F800A8C16D /* KKFramework.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		556967CC2589DEA700B52BA7 /* ObjC */ = {
 			isa = PBXGroup;
 			children = (
@@ -518,6 +544,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				55249D3F25A72A0300A8C16D /* PBXTargetDependency */,
 				5516DA8C2578E44C00C0D268 /* PBXTargetDependency */,
 			);
 			name = KernelKitTests;
@@ -552,6 +579,12 @@
 			mainGroup = 5516DA5E2578E34A00C0D268;
 			productRefGroup = 5516DA692578E34A00C0D268 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 55249D3925A729F800A8C16D /* Products */;
+					ProjectRef = 55249D3825A729F800A8C16D /* KKFramework.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				5516DA672578E34A00C0D268 /* KernelKit */,
@@ -559,6 +592,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		55249D3D25A729F800A8C16D /* KKFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = KKFramework.framework;
+			remoteRef = 55249D3C25A729F800A8C16D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5516DA662578E34A00C0D268 /* Resources */ = {
@@ -639,6 +682,11 @@
 			isa = PBXTargetDependency;
 			target = 5516DA672578E34A00C0D268 /* KernelKit */;
 			targetProxy = 5516DA8B2578E44C00C0D268 /* PBXContainerItemProxy */;
+		};
+		55249D3F25A72A0300A8C16D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = KKFramework;
+			targetProxy = 55249D3E25A72A0300A8C16D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -775,7 +823,7 @@
 				);
 				INFOPLIST_FILE = KernelKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -803,7 +851,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = USE_DL_PREFIX;
 				INFOPLIST_FILE = KernelKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
