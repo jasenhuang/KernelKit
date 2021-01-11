@@ -42,7 +42,7 @@
         int sum = origin(name, rect);
         return sum;
     });
-    test_t t;
+    struct test_t t;
     t.x = 100;
     testFunc1((char*)"jasen", t);
     
@@ -50,11 +50,29 @@
      * hook function with var_list
      *
      */
-    kk_fish_hook(@"printf", (kk_replacement_function)^int(KKContext *context, char * format, KKType a, KKType b, KKType c, KKType d){
+    kk_fish_hook(@"printf", (kk_replacement_function)^int(KKContext *context, char * format, KKTypeList){
         int(*origin)(char*,...) = (int(*)(char*,...))context.replaced_function;
-        return origin(format, a, b, c, d);
+        origin(format, KKVarList);
+        return 0;
     });
     printf("%d, %s, %s\n", 1, "hello", "world");
+    
+    kk_fish_hook(@"testFunc2", (kk_replacement_function)^struct test_t(KKContext *context, int a){
+        struct test_t(*origin)(int) = (struct test_t(*)(int))context.replaced_function;
+        struct test_t ret = origin(a);
+        NSLog(@"{%@, %@}", @(ret.x), @(ret.y));
+        return ret;
+    });
+    /**
+     * hook async
+     */
+    XCTestExpectation *expectation = [[XCTestExpectation alloc] initWithDescription:@"Wait for block invoke."];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        struct test_t ret = testFunc2(1);
+        NSLog(@"{%@, %@}", @(ret.x), @(ret.y));
+        [expectation fulfill];
+    });
+    [self waitForExpectations:@[expectation] timeout:30];
 }
 
 - (void)testPerformanceExample {

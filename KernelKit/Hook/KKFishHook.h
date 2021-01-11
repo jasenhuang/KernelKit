@@ -10,6 +10,21 @@
 
 KK_EXTERN_C_BEGIN
 
+typedef char* KKType;
+#define KKVarList   \
+_1, _2, _3,         \
+_4, _5, _6,         \
+_7, _8, _9,         \
+_10, _11, _12,      \
+_13, _14, _15
+
+#define KKTypeList \
+KKType _1, KKType _2, KKType _3,    \
+KKType _4, KKType _5, KKType _6,    \
+KKType _7, KKType _8, KKType _9,    \
+KKType _10, KKType _11, KKType _12, \
+KKType _13, KKType _14, KKType _15
+
 @interface KKContext : NSObject
 @property(nonatomic, copy, readonly) id replacement_function;
 @property(nonatomic, readonly) void* replaced_function;
@@ -19,8 +34,6 @@ KK_EXTERN_C_BEGIN
 @interface KKToken : NSObject
 - (void)restore;
 @end
-
-typedef char* KKType;
 
 /**
  * replacement block

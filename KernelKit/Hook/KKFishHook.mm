@@ -162,11 +162,10 @@ static void _kk_ffi_closure_func(ffi_cif *cif, void *ret, void **args, void *use
         [invocation setArgument:args[idx - 2] atIndex:idx];
     }
     
-    [invocation setReturnValue:ret];
-    //[invocation retainArguments];//TODO
-    
     [invocation invokeWithTarget:context.replacement_function];
     //ffi_call(cif, (void(*)(void))block->invoke, ret, args);
+    
+    [invocation getReturnValue:ret];
 }
 
 
