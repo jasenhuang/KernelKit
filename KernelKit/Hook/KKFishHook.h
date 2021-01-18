@@ -25,12 +25,6 @@ KKType _7, KKType _8, KKType _9,    \
 KKType _10, KKType _11, KKType _12, \
 KKType _13, KKType _14, KKType _15
 
-@interface KKContext : NSObject
-@property(nonatomic, copy, readonly) id replacement_function;
-@property(nonatomic, readonly) void* replaced_function;
-@property(nonatomic, readonly) NSMethodSignature* signature;
-@end
-
 @interface KKToken : NSObject
 - (void)restore;
 @end
@@ -40,7 +34,7 @@ KKType _13, KKType _14, KKType _15
  * need to complete arguments
  *
  */
-typedef void*(^kk_replacement_function)(KKContext*);
+typedef void*(^kk_replacement_function)(void* replaced);
 
 /**
  * fish hook function with block

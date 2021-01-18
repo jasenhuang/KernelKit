@@ -36,31 +36,24 @@ inline void ffi_types_free(ffi_type** types) {
     free(types);
 }
 
-
-@interface KKContext()
-@property(nonatomic, copy, readwrite) id replacement_function;
-@property(nonatomic, readwrite) void* replaced_function;
-@property(nonatomic, readwrite) NSMethodSignature* signature;
-@end
-
-@implementation KKContext
-
-@end
-
 @interface KKToken()
+@property(nonatomic, readwrite) NSString* name;
+// ffi
 @property(nonatomic, readwrite) ffi_cif *cif;
 @property(nonatomic, readwrite) NSUInteger argc;
 @property(nonatomic, readwrite) ffi_type **argTypes;
 @property(nonatomic, readwrite) ffi_type *retType;
 @property(nonatomic, readwrite) ffi_closure *closure;
-@property(nonatomic, readwrite) NSString* name;
-@property(nonatomic, readwrite) void* replaced;
+// hook
+@property(nonatomic, copy, readwrite) id replacement_function;
+@property(nonatomic, readwrite) void* replaced_function;
+@property(nonatomic, readwrite) NSMethodSignature* signature;
 @end
 
 @implementation KKToken
 - (void)restore {
     rebind_symbols((struct rebinding[1]){
-        _name.UTF8String, _replaced, NULL
+        _name.UTF8String, _replaced_function, NULL
     }, 1);
 }
 
@@ -85,12 +78,14 @@ KKToken* kk_fish_hook(NSString* func, kk_replacement_function block) {
         NSLog(@"Hooking StackBlock causes a memory leak! I suggest you copy it first!");
     }
     
-    KKContext* context = [[KKContext alloc] init];
-    context.replacement_function = block;
+    KKToken* token = [[KKToken alloc] init];
+    token.name = func;
+    token.replacement_function = block;
+    _kk_fish_hook_blocks[func] = token;
     
     NSError* error;
     NSMethodSignature* signature = kk_block_method_signature(block, &error);
-    context.signature = signature;
+    token.signature = signature;
     
     // 构造参数类型列表
     size_t argc = signature.numberOfArguments;
@@ -118,12 +113,19 @@ KKToken* kk_fish_hook(NSString* func, kk_replacement_function block) {
     // 生成新的 Function
     void *_kk_closure_function = NULL;
     ffi_closure *closure = (ffi_closure *)ffi_closure_alloc(sizeof(ffi_closure), (void **)&_kk_closure_function);
-    ret = ffi_prep_closure_loc(closure, cif, _kk_ffi_closure_func, (__bridge_retained void *)context, _kk_closure_function);
+    ret = ffi_prep_closure_loc(closure, cif, _kk_ffi_closure_func, (char *)func.UTF8String, _kk_closure_function);
     if (ret != FFI_OK) {
         NSCAssert(NO, @"ffi_prep_closure_loc failed: %d", ret);
         return nil;
     }
     
+    token.cif = cif;
+    token.closure = closure;
+    token.argTypes = argTypes;
+    token.retType = retType;
+    token.argc = argc;
+    
+    // 执行 Hook
     void *(*replaced)(...) = nullptr;
     void *replacement = _kk_closure_function;
     
@@ -131,29 +133,21 @@ KKToken* kk_fish_hook(NSString* func, kk_replacement_function block) {
         func.UTF8String, replacement, (void**)&replaced
     }, 1);
     
-    context.replaced_function = (void*)replaced;
-    
-    // token 内存管理
-    KKToken* token = [[KKToken alloc] init];
-    token.cif = cif;
-    token.closure = closure;
-    token.argTypes = argTypes;
-    token.retType = retType;
-    token.argc = argc;
-    token.replaced = (void*)replaced;
-    token.name = func;
-    _kk_fish_hook_blocks[func] = token;
+    token.replaced_function = (void*)replaced;
     
     return token;
 }
 
 static void _kk_ffi_closure_func(ffi_cif *cif, void *ret, void **args, void *userdata) {
-    KKContext* context = (__bridge_transfer id)userdata;
     
-    NSMethodSignature* signature = context.signature;
-    NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:context.signature];
+    char* name = (char*)userdata;
+    KKToken* token = _kk_fish_hook_blocks[@(name)];
+    
+    NSMethodSignature* signature = token.signature;
+    NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:signature];
     if (signature.numberOfArguments > 1) {
-        [invocation setArgument:(void *)&context atIndex:1];
+        void* replaced = token.replaced_function;
+        [invocation setArgument:(void *)&replaced atIndex:1];
     }
     
     // origin block invoke func arguments: block(self), ...
@@ -162,7 +156,7 @@ static void _kk_ffi_closure_func(ffi_cif *cif, void *ret, void **args, void *use
         [invocation setArgument:args[idx - 2] atIndex:idx];
     }
     
-    [invocation invokeWithTarget:context.replacement_function];
+    [invocation invokeWithTarget:token.replacement_function];
     //ffi_call(cif, (void(*)(void))block->invoke, ret, args);
     
     [invocation getReturnValue:ret];

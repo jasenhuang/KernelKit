@@ -25,7 +25,7 @@
 
 KK_EXTERN_C_BEGIN
 
-typedef void(^kk_mach_image_callback)(const struct mach_header*,intptr_t);
+typedef void(^kk_mach_image_callback)(const struct mach_header* _Nonnull,intptr_t);
 
 /**
  * get info at address

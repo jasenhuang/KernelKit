@@ -1,18 +1,17 @@
 //
-//  KKDynamicLinkerTest.m
-//  KernelKitTests
+//  KKSampleTests.m
+//  KKSampleTests
 //
-//  Created by jasenhuang on 2020/12/16.
+//  Created by 黄栩生 on 2021/1/18.
 //
 
 #import <XCTest/XCTest.h>
-#import <KernelKit/KernelKit.h>
 
-@interface KKDynamicLinkerTest : XCTestCase
+@interface KKSampleTests : XCTestCase
 
 @end
 
-@implementation KKDynamicLinkerTest
+@implementation KKSampleTests
 
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -25,13 +24,6 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
-    NSLog(@"%@", kk_get_loaded_mach_images());
-    kk_register_image_add_callback(^(const struct mach_header * _Nonnull header, intptr_t slide) {
-        NSLog(@"add %p", header);
-    });
-    kk_register_image_remove_callback(^(const struct mach_header * _Nonnull header, intptr_t slide) {
-        NSLog(@"remove %p", header);
-    });
 }
 
 - (void)testPerformanceExample {

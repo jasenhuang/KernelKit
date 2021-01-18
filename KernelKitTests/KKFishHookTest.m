@@ -29,36 +29,36 @@
     // Use XCTAssert and related functions to verify your tests produce the correct results.
     
     // hook function
-    kk_fish_hook(@"testFunc", (kk_replacement_function)^int(KKContext *context, char* name, int age) {
-        int(*origin)(char*,int) = (int(*)(char*,int))context.replaced_function;
+    kk_fish_hook(@"testFunc", (kk_replacement_function)^int(void *replaced, char* name, int age) {
+        int(*origin)(char*,int) = (int(*)(char*,int))replaced;
         int sum = origin(name, age);
         return sum;
     });
     testFunc((char*)"jasen", 2);
     
     // hook function with struct
-    kk_fish_hook(@"testFunc1", (kk_replacement_function)^int(KKContext *context, char* name, struct test_t rect) {
-        int(*origin)(char*,struct test_t) = (int(*)(char*,struct test_t))context.replaced_function;
+    kk_fish_hook(@"testFunc1", (kk_replacement_function)^int(void *replaced, char* name, struct test_t rect) {
+        int(*origin)(char*,struct test_t) = (int(*)(char*,struct test_t))replaced;
         int sum = origin(name, rect);
         return sum;
     });
-    struct test_t t;
-    t.x = 100;
-    testFunc1((char*)"jasen", t);
+    struct test_t t1;
+    t1.x = 100;
+    testFunc1((char*)"jasen1", t1);
     
     /**
      * hook function with var_list
      *
      */
-    kk_fish_hook(@"printf", (kk_replacement_function)^int(KKContext *context, char * format, KKTypeList){
-        int(*origin)(char*,...) = (int(*)(char*,...))context.replaced_function;
-        origin(format, KKVarList);
-        return 0;
+    kk_fish_hook(@"printf", (kk_replacement_function)^int(void *replaced, char * format, KKTypeList){
+        int(*origin)(char*,...) = (int(*)(char*,...))replaced;
+        NSLog(@"DBG:");
+        return origin(format, KKVarList);
     });
     printf("%d, %s, %s\n", 1, "hello", "world");
     
-    kk_fish_hook(@"testFunc2", (kk_replacement_function)^struct test_t(KKContext *context, int a){
-        struct test_t(*origin)(int) = (struct test_t(*)(int))context.replaced_function;
+    kk_fish_hook(@"testFunc2", (kk_replacement_function)^struct test_t(void *replaced, int a){
+        struct test_t(*origin)(int) = (struct test_t(*)(int))replaced;
         struct test_t ret = origin(a);
         NSLog(@"{%@, %@}", @(ret.x), @(ret.y));
         return ret;
@@ -67,7 +67,7 @@
      * hook async
      */
     XCTestExpectation *expectation = [[XCTestExpectation alloc] initWithDescription:@"Wait for block invoke."];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         struct test_t ret = testFunc2(1);
         NSLog(@"{%@, %@}", @(ret.x), @(ret.y));
         [expectation fulfill];
