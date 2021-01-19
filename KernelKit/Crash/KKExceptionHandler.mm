@@ -6,6 +6,7 @@
 //
 
 #import "KKExceptionHandler.h"
+#import "KKCrashHandler.h"
 
 static NSUncaughtExceptionHandler* _kk_previousExceptionHandler;
 
@@ -13,10 +14,19 @@ static NSMutableArray* _kk_exception_callbacks = @[].mutableCopy;
 
 static void handleException(NSException* exception) {
     NSLog(@"Trapped exception %@", exception);
+    
     /* handle exception */
-    /* disable all crash handlers and re-raise signal */
+    NSArray* blocks = _kk_exception_callbacks;
+    for (kk_exception_callback block in blocks) {
+        block(exception);
+    }
+    
+    /* disable all handlers */
+    kk_enable_crash_handlers(false);
+    
     /* call previsous handler */
-    _kk_previousExceptionHandler(exception);
+    if (_kk_previousExceptionHandler)
+        _kk_previousExceptionHandler(exception);
 }
 
 #pragma NSException handler interception
@@ -46,4 +56,18 @@ void kk_register_exception_callback(kk_exception_callback callback) {
  */
 void kk_unregister_exception_callback(kk_exception_callback callback) {
     [_kk_exception_callbacks removeObject:callback];
+}
+
+/**
+ * enable handler
+ */
+void kk_enable_exception_handler(bool enabled) {
+    
+}
+
+/**
+ * is handler enabled
+ */
+bool is_kk_exception_handler_enabled(void) {
+    return false;
 }

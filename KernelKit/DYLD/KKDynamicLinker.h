@@ -30,31 +30,31 @@ typedef void(^kk_mach_image_callback)(const struct mach_header* _Nonnull,intptr_
 /**
  * get info at address
  */
-KKDLInfo* kk_dladdr(const void* addr);
+KKDLInfo* _Nullable kk_dladdr(const void* _Nullable addr);
 
 /**
  *  register mach image add callback
  */
-void kk_register_image_add_callback(kk_mach_image_callback callback);
+void kk_register_image_add_callback(kk_mach_image_callback _Nullable callback);
 
 /**
  *  un register mach image add callback
  */
-void kk_unregister_image_add_callback(kk_mach_image_callback callback);
+void kk_unregister_image_add_callback(kk_mach_image_callback _Nullable callback);
 
 /**
  *  register mach image remove callback
  */
-void kk_register_image_remove_callback(kk_mach_image_callback callback);
+void kk_register_image_remove_callback(kk_mach_image_callback _Nullable callback);
 
 /**
  *  unregister mach image remove callback
  */
-void kk_unregister_image_remove_callback(kk_mach_image_callback callback);
+void kk_unregister_image_remove_callback(kk_mach_image_callback _Nullable callback);
 
 /**
  *  get loaded mach images
  */
-NSArray<KKMachInfo*>* kk_get_loaded_mach_images();
+NSArray<KKMachInfo*>* _Nullable kk_get_loaded_mach_images();
 
 KK_EXTERN_C_END

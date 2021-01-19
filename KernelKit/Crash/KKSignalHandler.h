@@ -39,4 +39,14 @@ void kk_register_signals_callback(kk_signal_callback callback);
  */
 void kk_unregister_signals_callback(kk_signal_callback callback);
 
+/**
+ * enable handler
+ */
+void kk_enable_signal_handler(bool enabled);
+
+/**
+ * is handler enabled
+ */
+bool is_kk_signal_handler_enabled(void);
+
 KK_EXTERN_C_END

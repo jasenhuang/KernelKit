@@ -6,7 +6,7 @@
 //
 
 #import "KKSignalHandler.h"
-#import "KKMacros.h"
+#import "KKCrashHandler.h"
 
 typedef void(*kk_sa_handler)(int);
 typedef void(*kk_sa_sigaction)(int, siginfo_t *, void *);
@@ -37,6 +37,9 @@ static void handleSignal(int sigNum, siginfo_t* signalInfo, void* userContext) {
         block(sigNum);
     }
     
+    /* disable all handlers */
+    kk_enable_crash_handlers(false);
+    
     /* call previsous handler */
     int i = 0;
     for(; i < _kk_fatalSignalsCount; ++i) if (sigNum == _kk_fatalSignals[i]) break;
@@ -50,9 +53,6 @@ static void handleSignal(int sigNum, siginfo_t* signalInfo, void* userContext) {
             action->sa_handler(sigNum);
         }
     }
-    
-    /* disable all crash handlers and re-raise signal */
-    
     
     NSLog(@"Re-raising signal for regular handlers to catch.");
     // This is technically not allowed, but it works in OSX and iOS.
@@ -135,4 +135,19 @@ void kk_unregister_signals_callback(kk_signal_callback callback) {
     for (int i = 0 ; i < _kk_fatalSignalsCount; ++i){
         kk_unregister_signal_callback(_kk_fatalSignals[i], callback);
     }
+}
+
+
+/**
+ * enable handler
+ */
+void kk_enable_signal_handler(bool enabled) {
+    
+}
+
+/**
+ * is handler enabled
+ */
+bool is_kk_signal_handler_enabled(void) {
+    return false;
 }

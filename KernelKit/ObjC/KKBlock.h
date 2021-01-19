@@ -77,12 +77,19 @@ const char* kk_block_type_encoding(id block, NSError** error);
 NSMethodSignature* kk_block_method_signature(id block, NSError** error);
 
 /**
- *
+ * get block invoke
  */
 BlockInvokeFunction kk_block_invoke_function(id block, NSError** error);
 
+/**
+ * get block copy
+ */
 BlockCopyFunction kk_block_copy_function(id block, NSError** error);
 
+
+/**
+ * get block dispose
+ */
 BlockDisposeFunction kk_block_dispose_function(id block, NSError** error);
 
 KK_EXTERN_C_END

@@ -25,21 +25,21 @@ KK_EXTERN_C_BEGIN
 /**
  * get current thread
  */
-KKThread* kk_thread_self();
+KKThread* kk_thread_self(void);
 /**
  * get all threads
  */
-NSArray<KKThread*>* kk_all_threads();
+NSArray<KKThread*>* kk_all_threads(void);
 
 /**
  * suspend all threads
  */
-NSArray<KKThread*>* kk_suspend_all_threads();
+NSArray<KKThread*>* kk_suspend_all_threads(void);
 
 /**
  * resume all threads
  */
-NSArray<KKThread*>* kk_resume_all_threads();
+NSArray<KKThread*>* kk_resume_all_threads(void);
 
 KK_EXTERN_C_END
 

@@ -15,7 +15,8 @@
 @implementation KKMachInfo
 @end
 
-KKDLInfo* kk_dladdr(const void* addr) {
+KKDLInfo* kk_dladdr(const void* _Nullable addr) {
+    if (NULL == addr) return nil;
     /** If an image containing addr cannot be found, dladdr() returns 0.
      * On success, a non-zero value is returned.
      */
@@ -58,11 +59,13 @@ static void dyld_image_add_callback(const struct mach_header* header,
 }
 
 void kk_register_image_add_callback(kk_mach_image_callback callback) {
+    if (!callback) return;
     [_kk_add_blocks addObject:callback];
     _dyld_register_func_for_add_image(dyld_image_add_callback);
 }
 
 void kk_unregister_image_add_callback(kk_mach_image_callback callback) {
+    if (!callback) return;
     [_kk_add_blocks removeObject:callback];
 }
 
@@ -75,11 +78,13 @@ static void dyld_image_remove_callback(const struct mach_header* header,
 }
 
 void kk_register_image_remove_callback(kk_mach_image_callback callback) {
+    if (!callback) return;
     [_kk_remove_blocks addObject:callback];
     _dyld_register_func_for_remove_image(dyld_image_remove_callback);
 }
 
 void kk_unregister_image_remove_callback(kk_mach_image_callback callback) {
+    if (!callback) return;
     [_kk_remove_blocks removeObject:callback];
 }
 
