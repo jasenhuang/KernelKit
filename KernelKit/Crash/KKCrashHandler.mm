@@ -10,12 +10,6 @@
 #import "KKExceptionHandler.h"
 #import "KKTerminationHandler.h"
 
-struct KKCrashHandler{
-    KKCrashHandlerType type;
-    void (*setEnabled)(bool isEnabled);
-    bool (*isEnabled)(void);
-};
-
 static KKCrashHandler kk_crash_handlers[] = {
     {
         .type = KKCrashHandlerTypeSignal,
@@ -58,20 +52,22 @@ void kk_enable_crash_handlers(bool enabled) {
     }
 }
 
+static NSMutableArray* _kk_compound_callbacks = @[].mutableCopy;
+
 /**
  * register callback for crash
  */
 void kk_register_crash_callback(kk_crash_callback callback) {
-    if (!callback) return ;
+    kk_enable_crash_handlers(true);
     
     kk_register_signals_callback(^(kk_signal signal) {
-        if (callback) callback(KKCrashHandlerTypeSignal, @{});
+        if (callback) callback(KKCrashHandlerTypeSignal, @{@"signal":@(signal)});
     });
     kk_register_exception_callback(^(NSException *exception) {
-        if (callback) callback(KKCrashHandlerTypeException, @{});
+        if (callback) callback(KKCrashHandlerTypeException, @{@"exception":exception});
     });
     kk_register_termination_callback(^(KKTermination *termination) {
-        if (callback) callback(KKCrashHandlerTypeTermination, @{});
+        if (callback) callback(KKCrashHandlerTypeTermination, @{@"termination":termination});
     });
 }
 

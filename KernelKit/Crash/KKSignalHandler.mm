@@ -28,6 +28,8 @@ static const int _kk_fatalSignalsCount = sizeof(_kk_fatalSignals) / sizeof(*_kk_
 
 static NSMutableDictionary* _kk_signal_callbacks = @{}.mutableCopy;
 
+static bool _kk_signal_handler_enabled = false;
+
 static void handleSignal(int sigNum, siginfo_t* signalInfo, void* userContext) {
     NSLog(@"Trapped signal %d", sigNum);
     /* handle signal */
@@ -62,7 +64,7 @@ static void handleSignal(int sigNum, siginfo_t* signalInfo, void* userContext) {
 #pragma signal handler interception
 void installSignalHandler() {
     if (_kk_previousSignalHandlers) return ;
-    NSLog(@"Installing signal handler.");
+    NSLog(@"Setting signal handler.");
     
     /* Allocating memory to store previous signal handlers." */
     _kk_previousSignalHandlers = (struct sigaction*)malloc(sizeof(*_kk_previousSignalHandlers)
@@ -84,7 +86,7 @@ void installSignalHandler() {
 }
 
 void uninstallSignalHandler() {
-    NSLog(@"Uninstalling signal handlers.");
+    NSLog(@"Restoring signal handlers.");
     
     for (int i = 0 ; i < _kk_fatalSignalsCount; ++i){
         if (0 != sigaction(_kk_fatalSignals[i], &_kk_previousSignalHandlers[i], NULL)) {
@@ -100,7 +102,8 @@ void uninstallSignalHandler() {
  * register callback for signal
  */
 void kk_register_signal_callback(kk_signal signal, kk_signal_callback callback) {
-    if (!_kk_previousSignalHandlers) installSignalHandler();
+    kk_enable_signal_handler(true);
+    
     NSMutableArray* blocks = _kk_signal_callbacks[@(signal)];
     if (!blocks) {
         blocks = @[].mutableCopy;
@@ -121,7 +124,7 @@ void kk_unregister_signal_callback(kk_signal signal, kk_signal_callback callback
  * register callback for common fatal signals
  */
 void kk_register_signals_callback(kk_signal_callback callback) {
-    if (!_kk_previousSignalHandlers) installSignalHandler();
+    kk_enable_signal_handler(true);
     
     for (int i = 0 ; i < _kk_fatalSignalsCount; ++i){
         kk_register_signal_callback(_kk_fatalSignals[i], callback);
@@ -142,12 +145,15 @@ void kk_unregister_signals_callback(kk_signal_callback callback) {
  * enable handler
  */
 void kk_enable_signal_handler(bool enabled) {
-    
+    if (_kk_signal_handler_enabled != enabled){
+        _kk_signal_handler_enabled = enabled;
+        enabled ? installSignalHandler() : uninstallSignalHandler();
+    }
 }
 
 /**
  * is handler enabled
  */
 bool is_kk_signal_handler_enabled(void) {
-    return false;
+    return _kk_signal_handler_enabled;
 }

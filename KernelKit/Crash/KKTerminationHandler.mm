@@ -22,6 +22,8 @@ static std::terminate_handler _kk_previsouTerminationHandler;
 
 static NSMutableArray* _kk_termination_callbacks = @[].mutableCopy;
 
+static bool _kk_termination_handler_enabled = false;
+
 // Compiler hints for "if" statements
 #define likely_if(x) if(__builtin_expect(x,1))
 #define unlikely_if(x) if(__builtin_expect(x,0))
@@ -110,26 +112,27 @@ catch(TYPE value)\
 
 #pragma Termination handler interception
 void installTerminationHandler() {
-    NSLog(@"Setting new exception handler.");
+    NSLog(@"Setting termination handler.");
     _kk_previsouTerminationHandler = std::set_terminate(handleTermination);
     
 }
 
 void uninstallTerminationHandler() {
-    NSLog(@"Restoring original handler.");
+    NSLog(@"Restoring termination handler.");
     std::set_terminate(_kk_previsouTerminationHandler);
 }
 
 /**
- * register callback for exception
+ * register callback for termination
  */
 void kk_register_termination_callback(kk_termination_callback callback) {
-    if (!_kk_previsouTerminationHandler) installTerminationHandler();
+    kk_enable_termination_handler(true);
+    
     [_kk_termination_callbacks addObject:callback];
 }
 
 /**
- * unregister callback for exception
+ * unregister callback for termination
  */
 void kk_unregister_termination_callback(kk_termination_callback callback) {
     [_kk_termination_callbacks removeObject:callback];
@@ -139,12 +142,15 @@ void kk_unregister_termination_callback(kk_termination_callback callback) {
  * enable handler
  */
 void kk_enable_termination_handler(bool enabled) {
-    
+    if (_kk_termination_handler_enabled != enabled){
+        _kk_termination_handler_enabled = enabled;
+        enabled ? installTerminationHandler() : uninstallTerminationHandler();
+    }
 }
 
 /**
  * is handler enabled
  */
 bool is_kk_termination_handler_enabled(void) {
-    return false;
+    return _kk_termination_handler_enabled;
 }

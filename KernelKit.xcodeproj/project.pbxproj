@@ -69,8 +69,8 @@
 		55249BA025A5B11400A8C16D /* internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 55249B7925A5B11300A8C16D /* internal.h */; };
 		55249BA125A5B11400A8C16D /* ffi_armv7.c in Sources */ = {isa = PBXBuildFile; fileRef = 55249B7A25A5B11300A8C16D /* ffi_armv7.c */; };
 		55249D4025A72A0600A8C16D /* KKFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55249D3D25A729F800A8C16D /* KKFramework.framework */; };
-		553273E425B68E8900DC4A46 /* KKCrashHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 553273E225B68E8900DC4A46 /* KKCrashHandler.h */; };
-		553273E525B68E8900DC4A46 /* KKCrashHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 553273E325B68E8900DC4A46 /* KKCrashHandler.m */; };
+		553273E425B68E8900DC4A46 /* KKCrashHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 553273E225B68E8900DC4A46 /* KKCrashHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		553273E525B68E8900DC4A46 /* KKCrashHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 553273E325B68E8900DC4A46 /* KKCrashHandler.mm */; };
 		5539453E25949C1A00F04F83 /* KKFishHookTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5539453D25949C1900F04F83 /* KKFishHookTest.m */; };
 		553945472598E60300F04F83 /* KKSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = 553945452598E60300F04F83 /* KKSwizzle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		553945482598E60300F04F83 /* KKSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 553945462598E60300F04F83 /* KKSwizzle.m */; };
@@ -85,7 +85,7 @@
 		55696824258A084F00B52BA7 /* KKDynamicLinkerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55696823258A084F00B52BA7 /* KKDynamicLinkerTest.m */; };
 		55696829258A0D6000B52BA7 /* KKDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 55696827258A0D6000B52BA7 /* KKDescribable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5569682A258A0D6000B52BA7 /* KKDescribable.m in Sources */ = {isa = PBXBuildFile; fileRef = 55696828258A0D6000B52BA7 /* KKDescribable.m */; };
-		55696830258A3F7500B52BA7 /* KKCrashHandlerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5569682F258A3F7500B52BA7 /* KKCrashHandlerTest.m */; };
+		55696830258A3F7500B52BA7 /* KKCrashHandlerTest.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5569682F258A3F7500B52BA7 /* KKCrashHandlerTest.mm */; };
 		55696835258B877900B52BA7 /* KKExceptionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 55696833258B877900B52BA7 /* KKExceptionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55696836258B877900B52BA7 /* KKExceptionHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55696834258B877900B52BA7 /* KKExceptionHandler.mm */; };
 		556969722593483900B52BA7 /* KKTerminationHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 556969702593483900B52BA7 /* KKTerminationHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -183,7 +183,7 @@
 		55249B7A25A5B11300A8C16D /* ffi_armv7.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ffi_armv7.c; sourceTree = "<group>"; };
 		55249D3825A729F800A8C16D /* KKFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KKFramework.xcodeproj; path = KKFramework/KKFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		553273E225B68E8900DC4A46 /* KKCrashHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKCrashHandler.h; sourceTree = "<group>"; };
-		553273E325B68E8900DC4A46 /* KKCrashHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKCrashHandler.m; sourceTree = "<group>"; };
+		553273E325B68E8900DC4A46 /* KKCrashHandler.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = KKCrashHandler.mm; sourceTree = "<group>"; };
 		5539453D25949C1900F04F83 /* KKFishHookTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKFishHookTest.m; sourceTree = "<group>"; };
 		553945452598E60300F04F83 /* KKSwizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKSwizzle.h; sourceTree = "<group>"; };
 		553945462598E60300F04F83 /* KKSwizzle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKSwizzle.m; sourceTree = "<group>"; };
@@ -198,7 +198,7 @@
 		55696823258A084F00B52BA7 /* KKDynamicLinkerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKDynamicLinkerTest.m; sourceTree = "<group>"; };
 		55696827258A0D6000B52BA7 /* KKDescribable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKDescribable.h; sourceTree = "<group>"; };
 		55696828258A0D6000B52BA7 /* KKDescribable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKDescribable.m; sourceTree = "<group>"; };
-		5569682F258A3F7500B52BA7 /* KKCrashHandlerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKCrashHandlerTest.m; sourceTree = "<group>"; };
+		5569682F258A3F7500B52BA7 /* KKCrashHandlerTest.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = KKCrashHandlerTest.mm; sourceTree = "<group>"; };
 		55696833258B877900B52BA7 /* KKExceptionHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKExceptionHandler.h; sourceTree = "<group>"; };
 		55696834258B877900B52BA7 /* KKExceptionHandler.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = KKExceptionHandler.mm; sourceTree = "<group>"; };
 		556969702593483900B52BA7 /* KKTerminationHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKTerminationHandler.h; sourceTree = "<group>"; };
@@ -289,7 +289,7 @@
 				5516DABA257A2BC600C0D268 /* KKMemoryMappingTest.m */,
 				5569681D258A038200B52BA7 /* KKAutoreleasePoolPageTest.m */,
 				55696823258A084F00B52BA7 /* KKDynamicLinkerTest.m */,
-				5569682F258A3F7500B52BA7 /* KKCrashHandlerTest.m */,
+				5569682F258A3F7500B52BA7 /* KKCrashHandlerTest.mm */,
 				5539453D25949C1900F04F83 /* KKFishHookTest.m */,
 				55399061259DC37F00E6143E /* KKObjCABITest.m */,
 				5516DA892578E44C00C0D268 /* Info.plist */,
@@ -338,7 +338,7 @@
 				556969702593483900B52BA7 /* KKTerminationHandler.h */,
 				556969712593483900B52BA7 /* KKTerminationHandler.mm */,
 				553273E225B68E8900DC4A46 /* KKCrashHandler.h */,
-				553273E325B68E8900DC4A46 /* KKCrashHandler.m */,
+				553273E325B68E8900DC4A46 /* KKCrashHandler.mm */,
 			);
 			path = Crash;
 			sourceTree = "<group>";
@@ -491,6 +491,7 @@
 				5516DB0A257E1B8300C0D268 /* KKSignalHandler.h in Headers */,
 				55249B8025A5B11300A8C16D /* ffi_x86_64.h in Headers */,
 				55249B7F25A5B11300A8C16D /* ffitarget_armv7.h in Headers */,
+				553273E425B68E8900DC4A46 /* KKCrashHandler.h in Headers */,
 				55249B8225A5B11300A8C16D /* ffi_common.h in Headers */,
 				5516DAE2257A3E3400C0D268 /* fishhook.h in Headers */,
 				55249B7D25A5B11300A8C16D /* ffi_i386.h in Headers */,
@@ -511,7 +512,6 @@
 				55249B9325A5B11400A8C16D /* internal.h in Headers */,
 				55249B8B25A5B11400A8C16D /* ffi_arm64.h in Headers */,
 				55249B9E25A5B11400A8C16D /* internal64.h in Headers */,
-				553273E425B68E8900DC4A46 /* KKCrashHandler.h in Headers */,
 				5516DA972578E50F00C0D268 /* KKOOMTracker.h in Headers */,
 				55249B8725A5B11400A8C16D /* ffi_cfi.h in Headers */,
 				55249B8525A5B11400A8C16D /* fficonfig_i386.h in Headers */,
@@ -636,7 +636,7 @@
 				5569682A258A0D6000B52BA7 /* KKDescribable.m in Sources */,
 				5516DA982578E50F00C0D268 /* KKOOMTracker.m in Sources */,
 				55249B9025A5B11400A8C16D /* dlmalloc.c in Sources */,
-				553273E525B68E8900DC4A46 /* KKCrashHandler.m in Sources */,
+				553273E525B68E8900DC4A46 /* KKCrashHandler.mm in Sources */,
 				55249B9825A5B11400A8C16D /* ffi64_x86_64.c in Sources */,
 				55249B8E25A5B11400A8C16D /* debug.c in Sources */,
 				55249B9D25A5B11400A8C16D /* unix64_x86_64.S in Sources */,
@@ -672,7 +672,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55696830258A3F7500B52BA7 /* KKCrashHandlerTest.m in Sources */,
+				55696830258A3F7500B52BA7 /* KKCrashHandlerTest.mm in Sources */,
 				5516DA882578E44C00C0D268 /* KernelKitTests.m in Sources */,
 				55399062259DC37F00E6143E /* KKObjCABITest.m in Sources */,
 				5569681E258A038200B52BA7 /* KKAutoreleasePoolPageTest.m in Sources */,

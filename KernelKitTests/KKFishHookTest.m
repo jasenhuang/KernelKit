@@ -52,7 +52,6 @@
      */
     kk_fish_hook(@"printf", (kk_replacement_function)^int(void *replaced, char * format, KKTypeList){
         int(*origin)(char*,...) = (int(*)(char*,...))replaced;
-        NSLog(@"DBG:");
         return origin(format, KKVarList);
     });
     printf("%d, %s, %s\n", 1, "hello", "world");

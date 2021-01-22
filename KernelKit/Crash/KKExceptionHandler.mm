@@ -12,6 +12,8 @@ static NSUncaughtExceptionHandler* _kk_previousExceptionHandler;
 
 static NSMutableArray* _kk_exception_callbacks = @[].mutableCopy;
 
+static bool _kk_exception_handler_enabled = false;
+
 static void handleException(NSException* exception) {
     NSLog(@"Trapped exception %@", exception);
     
@@ -31,14 +33,14 @@ static void handleException(NSException* exception) {
 
 #pragma NSException handler interception
 void installExceptionHandler() {
-    NSLog(@"Setting new exception handler.");
+    NSLog(@"Setting exception handler.");
     _kk_previousExceptionHandler = NSGetUncaughtExceptionHandler();
     
     NSSetUncaughtExceptionHandler(&handleException);
 }
 
 void uninstallExceptionHandler() {
-    NSLog(@"Restoring original handler.");
+    NSLog(@"Restoring exception handler.");
     
     NSSetUncaughtExceptionHandler(_kk_previousExceptionHandler);
 }
@@ -47,7 +49,8 @@ void uninstallExceptionHandler() {
  * register callback for exception
  */
 void kk_register_exception_callback(kk_exception_callback callback) {
-    if (!_kk_previousExceptionHandler) installExceptionHandler();
+    kk_enable_exception_handler(true);
+    
     [_kk_exception_callbacks addObject:callback];
 }
 
@@ -62,12 +65,15 @@ void kk_unregister_exception_callback(kk_exception_callback callback) {
  * enable handler
  */
 void kk_enable_exception_handler(bool enabled) {
-    
+    if (_kk_exception_handler_enabled != enabled){
+        _kk_exception_handler_enabled = enabled;
+        enabled ? installExceptionHandler() : uninstallExceptionHandler();
+    }
 }
 
 /**
  * is handler enabled
  */
 bool is_kk_exception_handler_enabled(void) {
-    return false;
+    return _kk_exception_handler_enabled;
 }

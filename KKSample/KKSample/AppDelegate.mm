@@ -25,6 +25,16 @@
     printf("%d, %s, %s\n", 1, "hello", "world");
     printf("%d, %s, %s\n", 1, "hello", "world");
     
+    kk_register_exception_callback(^(NSException * exception) {
+        NSLog(@"exception crash happened");
+    });
+    //[@{}.mutableCopy setObject:nil forKey:@""];
+    
+    kk_register_termination_callback(^(KKTermination * termination) {
+        NSLog(@"c++ crash happened");
+    });
+    //throw "Division by zero condition!";
+    
     return YES;
 }
 
