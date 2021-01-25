@@ -52,29 +52,42 @@ void kk_enable_crash_handlers(bool enabled) {
     }
 }
 
-static NSMutableArray* _kk_compound_callbacks = @[].mutableCopy;
+static NSMutableDictionary* _kk_compound_callbacks = @{}.mutableCopy;
 
 /**
  * register callback for crash
  */
 void kk_register_crash_callback(kk_crash_callback callback) {
     kk_enable_crash_handlers(true);
+    NSArray* callbacks =
+    @[
+       ^(kk_signal signal) {
+           if (callback) callback(KKCrashHandlerTypeSignal, @{@"signal":@(signal)});
+       },
+       ^(NSException *exception) {
+           if (callback) callback(KKCrashHandlerTypeException, @{@"exception":exception});
+       },
+       ^(KKTermination *termination) {
+           if (callback) callback(KKCrashHandlerTypeTermination, @{@"termination":termination});
+       }
+    ];
     
-    kk_register_signals_callback(^(kk_signal signal) {
-        if (callback) callback(KKCrashHandlerTypeSignal, @{@"signal":@(signal)});
-    });
-    kk_register_exception_callback(^(NSException *exception) {
-        if (callback) callback(KKCrashHandlerTypeException, @{@"exception":exception});
-    });
-    kk_register_termination_callback(^(KKTermination *termination) {
-        if (callback) callback(KKCrashHandlerTypeTermination, @{@"termination":termination});
-    });
+    kk_register_signals_callback(callbacks[0]);
+    kk_register_exception_callback(callbacks[1]);
+    kk_register_termination_callback(callbacks[2]);
+    
+    NSString* addr = [NSString stringWithFormat:@"%p", callback];
+    [_kk_compound_callbacks setObject:callbacks forKey:addr];
 }
 
 /**
  * unregister callback for crash
  */
 void kk_unregister_crash_callback(kk_crash_callback callback) {
-    if (!callback) return ;
-    //TODO
+    NSString* addr = [NSString stringWithFormat:@"%p", callback];
+    NSArray* callbacks = [_kk_compound_callbacks objectForKey:addr];
+    
+    kk_unregister_signals_callback(callbacks[0]);
+    kk_unregister_exception_callback(callbacks[1]);
+    kk_unregister_termination_callback(callbacks[2]);
 }

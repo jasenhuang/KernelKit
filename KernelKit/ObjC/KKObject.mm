@@ -1,8 +1,8 @@
 //
-//  NSObject-internal.c
+//  KKObject.h
 //  KernelKit
 //
-//  Created by jasenhuang on 2020/12/16.
+//  Created by 黄栩生 on 2020/12/31.
 //
 
 #import <KernelKit/KKMacros.h>
