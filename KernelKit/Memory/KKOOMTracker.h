@@ -6,8 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-NS_ASSUME_NONNULL_BEGIN
+#import <KernelKit/KKMacros.h>
 
 #if TARGET_OS_IOS
 
@@ -21,4 +20,3 @@ NS_ASSUME_NONNULL_BEGIN
 
 #endif
 
-NS_ASSUME_NONNULL_END

@@ -90,6 +90,8 @@
 		55696836258B877900B52BA7 /* KKExceptionHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 55696834258B877900B52BA7 /* KKExceptionHandler.mm */; };
 		556969722593483900B52BA7 /* KKTerminationHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 556969702593483900B52BA7 /* KKTerminationHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		556969732593483900B52BA7 /* KKTerminationHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 556969712593483900B52BA7 /* KKTerminationHandler.mm */; };
+		558B47E125BFF0A500B4D052 /* KKMemory.h in Headers */ = {isa = PBXBuildFile; fileRef = 558B47DF25BFF0A500B4D052 /* KKMemory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		558B47E225BFF0A500B4D052 /* KKMemory.m in Sources */ = {isa = PBXBuildFile; fileRef = 558B47E025BFF0A500B4D052 /* KKMemory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,6 +205,8 @@
 		55696834258B877900B52BA7 /* KKExceptionHandler.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = KKExceptionHandler.mm; sourceTree = "<group>"; };
 		556969702593483900B52BA7 /* KKTerminationHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKTerminationHandler.h; sourceTree = "<group>"; };
 		556969712593483900B52BA7 /* KKTerminationHandler.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = KKTerminationHandler.mm; sourceTree = "<group>"; };
+		558B47DF25BFF0A500B4D052 /* KKMemory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKMemory.h; sourceTree = "<group>"; };
+		558B47E025BFF0A500B4D052 /* KKMemory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKMemory.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,6 +304,8 @@
 		5516DA942578E4FC00C0D268 /* Memory */ = {
 			isa = PBXGroup;
 			children = (
+				558B47DF25BFF0A500B4D052 /* KKMemory.h */,
+				558B47E025BFF0A500B4D052 /* KKMemory.m */,
 				5516DA952578E50F00C0D268 /* KKOOMTracker.h */,
 				5516DA962578E50F00C0D268 /* KKOOMTracker.m */,
 			);
@@ -491,6 +497,7 @@
 				5516DB0A257E1B8300C0D268 /* KKSignalHandler.h in Headers */,
 				55249B8025A5B11300A8C16D /* ffi_x86_64.h in Headers */,
 				55249B7F25A5B11300A8C16D /* ffitarget_armv7.h in Headers */,
+				558B47E125BFF0A500B4D052 /* KKMemory.h in Headers */,
 				553273E425B68E8900DC4A46 /* KKCrashHandler.h in Headers */,
 				55249B8225A5B11300A8C16D /* ffi_common.h in Headers */,
 				5516DAE2257A3E3400C0D268 /* fishhook.h in Headers */,
@@ -634,6 +641,7 @@
 			files = (
 				5516DAAB25791E4D00C0D268 /* KKDynamicLinker.mm in Sources */,
 				5569682A258A0D6000B52BA7 /* KKDescribable.m in Sources */,
+				558B47E225BFF0A500B4D052 /* KKMemory.m in Sources */,
 				5516DA982578E50F00C0D268 /* KKOOMTracker.m in Sources */,
 				55249B9025A5B11400A8C16D /* dlmalloc.c in Sources */,
 				553273E525B68E8900DC4A46 /* KKCrashHandler.mm in Sources */,
